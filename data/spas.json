@@ -1,0 +1,67 @@
+[
+    {
+      "id": "s1",
+      "name": "Zen Haven Spa",
+      "description": "Luxury spa offering hot stone and aromatherapy treatments in a serene environment. Experience tranquility in the heart of Nairobi.",
+      "services": ["Hot Stone", "Aromatherapy", "Body Scrub", "Facial Treatments"],
+      "image": "/placeholder.svg?height=600&width=800",
+      "rating": 4.7,
+      "reviews": 342,
+      "priceRange": "Ksh 3,000 - 8,000",
+      "phone": "+254712345678",
+      "whatsapp": "+254712345678",
+      "address": "Westlands, Nairobi",
+      "distance": "3.2 km",
+      "openHours": "9:00 AM - 9:00 PM",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8193!2d36.8!3d-1.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTUnMzYuMCJTIDM2wrA0OCcwMC4wIkU!5e0!3m2!1sen!2ske!4v1234567890"
+    },
+    {
+      "id": "s2",
+      "name": "Tranquil Touch Spa",
+      "description": "Modern spa in Westlands offering deep tissue and couples packages. Perfect for relaxation and rejuvenation.",
+      "services": ["Deep Tissue", "Couples Massage", "Swedish", "Reflexology"],
+      "image": "/placeholder.svg?height=600&width=800",
+      "rating": 4.6,
+      "reviews": 267,
+      "priceRange": "Ksh 2,500 - 7,000",
+      "phone": "+254700112233",
+      "whatsapp": "+254700112233",
+      "address": "Kilimani, Nairobi",
+      "distance": "2.1 km",
+      "openHours": "8:00 AM - 10:00 PM",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8193!2d36.78!3d-1.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTYnNDguMCJTIDM2wrA0Nic0OC4wIkU!5e0!3m2!1sen!2ske!4v1234567890"
+    },
+    {
+      "id": "s3",
+      "name": "Serenity Wellness Center",
+      "description": "Full-service wellness center with spa treatments, yoga classes, and meditation sessions. Your sanctuary for mind and body.",
+      "services": ["Thai Massage", "Yoga", "Meditation", "Sauna"],
+      "image": "/placeholder.svg?height=600&width=800",
+      "rating": 4.9,
+      "reviews": 421,
+      "priceRange": "Ksh 3,500 - 10,000",
+      "phone": "+254722334455",
+      "whatsapp": "+254722334455",
+      "address": "Karen, Nairobi",
+      "distance": "5.8 km",
+      "openHours": "7:00 AM - 9:00 PM",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.9193!2d36.7!3d-1.32!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTknMTIuMCJTIDM2wrA0MicwMC4wIkU!5e0!3m2!1sen!2ske!4v1234567890"
+    },
+    {
+      "id": "s4",
+      "name": "Urban Oasis Spa",
+      "description": "Contemporary urban spa offering express treatments for busy professionals. Quick relaxation without compromising quality.",
+      "services": ["Express Massage", "Chair Massage", "Foot Reflexology", "Head Massage"],
+      "image": "/placeholder.svg?height=600&width=800",
+      "rating": 4.5,
+      "reviews": 189,
+      "priceRange": "Ksh 1,500 - 5,000",
+      "phone": "+254733445566",
+      "whatsapp": "+254733445566",
+      "address": "CBD, Nairobi",
+      "distance": "1.2 km",
+      "openHours": "10:00 AM - 8:00 PM",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8!2d36.82!3d-1.28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTYnNDguMCJTIDM2wrA0OScxMi4wIkU!5e0!3m2!1sen!2ske!4v1234567890"
+    }
+  ]
+  

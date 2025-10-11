@@ -1,0 +1,78 @@
+[
+    {
+      "id": "t1",
+      "name": "Amina Wanjiku",
+      "photo": "/placeholder.svg?height=400&width=400",
+      "rating": 4.8,
+      "reviews": 127,
+      "price": "Ksh 2,500",
+      "pricePerHour": 2500,
+      "distance": "2.4 km",
+      "bio": "Certified massage therapist with 8+ years of experience specializing in Swedish and aromatherapy sessions. I believe in holistic healing and creating a peaceful environment for every client.",
+      "specialties": ["Swedish", "Aromatherapy", "Hot Stone"],
+      "availableToday": true,
+      "yearsExperience": 8,
+      "certifications": ["Certified Massage Therapist", "Aromatherapy Specialist"]
+    },
+    {
+      "id": "t2",
+      "name": "Brian Otieno",
+      "photo": "/placeholder.svg?height=400&width=400",
+      "rating": 4.6,
+      "reviews": 89,
+      "price": "Ksh 2,000",
+      "pricePerHour": 2000,
+      "distance": "3.1 km",
+      "bio": "Skilled in deep tissue and sports massages. Former athlete who understands the body's needs for recovery and relaxation.",
+      "specialties": ["Deep Tissue", "Sports", "Trigger Point"],
+      "availableToday": false,
+      "yearsExperience": 5,
+      "certifications": ["Sports Massage Specialist", "Deep Tissue Certified"]
+    },
+    {
+      "id": "t3",
+      "name": "Grace Muthoni",
+      "photo": "/placeholder.svg?height=400&width=400",
+      "rating": 4.9,
+      "reviews": 203,
+      "price": "Ksh 3,000",
+      "pricePerHour": 3000,
+      "distance": "1.8 km",
+      "bio": "Luxury spa specialist offering premium treatments including hot stone therapy and full body relaxation packages.",
+      "specialties": ["Hot Stone", "Full Body", "Couples Massage"],
+      "availableToday": true,
+      "yearsExperience": 12,
+      "certifications": ["Master Therapist", "Hot Stone Specialist", "Couples Therapy"]
+    },
+    {
+      "id": "t4",
+      "name": "David Kamau",
+      "photo": "/placeholder.svg?height=400&width=400",
+      "rating": 4.7,
+      "reviews": 156,
+      "price": "Ksh 2,200",
+      "pricePerHour": 2200,
+      "distance": "4.2 km",
+      "bio": "Therapeutic massage expert focusing on pain relief and injury recovery. Combining traditional techniques with modern approaches.",
+      "specialties": ["Therapeutic", "Pain Relief", "Injury Recovery"],
+      "availableToday": true,
+      "yearsExperience": 7,
+      "certifications": ["Therapeutic Massage", "Pain Management Specialist"]
+    },
+    {
+      "id": "t5",
+      "name": "Sarah Njeri",
+      "photo": "/placeholder.svg?height=400&width=400",
+      "rating": 4.8,
+      "reviews": 178,
+      "price": "Ksh 2,800",
+      "pricePerHour": 2800,
+      "distance": "2.9 km",
+      "bio": "Holistic wellness practitioner specializing in aromatherapy and relaxation techniques. Creating personalized experiences for each client.",
+      "specialties": ["Aromatherapy", "Reflexology", "Prenatal"],
+      "availableToday": false,
+      "yearsExperience": 10,
+      "certifications": ["Aromatherapy Master", "Reflexology Certified", "Prenatal Specialist"]
+    }
+  ]
+  
