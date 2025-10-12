@@ -16,7 +16,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Lux" width={32} height={32} className="h-8 w-8" />
-            <span className="font-serif text-2xl font-semibold text-emerald-400">Lux</span>
+            <span className="font-serif text-2xl font-semibold text-primary">Lux</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -36,6 +36,12 @@ export function Header() {
             >
               Services
             </Link>
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+            >
+              Contact
+            </Link>
           </nav>
 
           {/* Desktop Auth Buttons */}
@@ -43,7 +49,7 @@ export function Header() {
             <Button variant="ghost" asChild>
               <Link href="/login">Sign in</Link>
             </Button>
-            <Button className="bg-emerald-900 hover:bg-emerald-900 text-white" asChild>
+            <Button className="bg-primary hover:bg-primary/90 text-white" asChild>
               <Link href="/signup">Register</Link>
             </Button>
           </div>
@@ -83,13 +89,20 @@ export function Header() {
               >
                 Services
               </Link>
+              <Link
+                href="/contact"
+                className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
               <div className="flex flex-col gap-2 pt-2 border-t border-border/40">
                 <Button variant="outline" asChild className="w-full bg-transparent">
                   <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
                     Sign in
                   </Link>
                 </Button>
-                <Button className="bg-emerald-900 hover:bg-emerald-900 text-white w-full" asChild>
+                <Button className="bg-primary hover:bg-primary/90 text-white w-full" asChild>
                   <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
                     Register
                   </Link>

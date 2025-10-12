@@ -3,8 +3,8 @@
 import { useState } from "react"
 import { TherapistCard } from "./therapist-card"
 import { Button } from "@/components/ui/button"
-import { X, Heart, MessageCircle, Info } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { X, Heart, MessageCircle, Info, ChevronLeft, ChevronRight } from "lucide-react"
+import { motion } from "framer-motion"
 import {
   Dialog,
   DialogContent,
@@ -22,8 +22,11 @@ export function SwipeDeck({ therapists }) {
   const [liked, setLiked] = useState([])
   const [skipped, setSkipped] = useState([])
   const [selectedTherapist, setSelectedTherapist] = useState(null)
+  const [swipeHistory, setSwipeHistory] = useState([])
 
   const currentTherapist = therapists[currentIndex]
+  const prevTherapist = currentIndex > 0 ? therapists[currentIndex - 1] : null
+  const nextTherapist = currentIndex < therapists.length - 1 ? therapists[currentIndex + 1] : null
 
   function handleSwipe(direction) {
     if (direction === "right") {
@@ -31,11 +34,24 @@ export function SwipeDeck({ therapists }) {
     } else {
       setSkipped([...skipped, currentTherapist.id])
     }
+    setSwipeHistory([...swipeHistory, currentIndex])
     setCurrentIndex((prev) => prev + 1)
   }
 
   function handleButtonSwipe(direction) {
     handleSwipe(direction)
+  }
+
+  function handlePrevious() {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1)
+    }
+  }
+
+  function handleNext() {
+    if (currentIndex < therapists.length - 1) {
+      setCurrentIndex((prev) => prev + 1)
+    }
   }
 
   if (currentIndex >= therapists.length) {
@@ -62,25 +78,44 @@ export function SwipeDeck({ therapists }) {
 
   return (
     <div className="relative w-full h-full flex flex-col">
-      {/* Cards Stack */}
-      <div className="relative flex-1 w-full max-w-md mx-auto">
-        <AnimatePresence>
-          {therapists.slice(currentIndex, currentIndex + 3).map((therapist, index) => (
-            <TherapistCard
-              key={therapist.id}
-              therapist={therapist}
-              onSwipe={index === 0 ? handleSwipe : () => {}}
-              style={{
-                zIndex: 3 - index,
-                scale: 1 - index * 0.05,
-                y: index * 10,
-              }}
-            />
-          ))}
-        </AnimatePresence>
+      <div className="relative flex-1 w-full max-w-md mx-auto flex items-center justify-center">
+        <div className="relative w-full h-full flex items-center justify-center">
+          {prevTherapist && (
+            <motion.div
+              key={`prev-${prevTherapist.id}`}
+              className="absolute left-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
+              initial={{ x: -100, scale: 0.85 }}
+              animate={{ x: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TherapistCard therapist={prevTherapist} onSwipe={() => {}} isPreview={true} />
+            </motion.div>
+          )}
+
+          <motion.div
+            key={`current-${currentTherapist.id}`}
+            className="absolute w-full h-full z-10"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <TherapistCard therapist={currentTherapist} onSwipe={handleSwipe} />
+          </motion.div>
+
+          {nextTherapist && (
+            <motion.div
+              key={`next-${nextTherapist.id}`}
+              className="absolute right-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
+              initial={{ x: 100, scale: 0.85 }}
+              animate={{ x: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              <TherapistCard therapist={nextTherapist} onSwipe={() => {}} isPreview={true} />
+            </motion.div>
+          )}
+        </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="flex items-center justify-center gap-6 py-8">
         <Button
           size="lg"
@@ -127,6 +162,7 @@ export function SwipeDeck({ therapists }) {
                       <span>{selectedTherapist.distance}</span>
                     </div>
                   </DialogDescription>
+                  <p className="text-sm text-muted-foreground">@{selectedTherapist.username}</p>
                 </DialogHeader>
 
                 <div className="space-y-4">
@@ -194,11 +230,32 @@ export function SwipeDeck({ therapists }) {
         </Button>
       </div>
 
-      {/* Counter */}
-      <div className="text-center pb-4">
-        <p className="text-sm text-muted-foreground">
-          {currentIndex + 1} / {therapists.length}
-        </p>
+      <div className="flex items-center justify-center gap-4 pb-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handlePrevious}
+          disabled={currentIndex === 0}
+          className="flex items-center gap-2 bg-transparent"
+        >
+          <ChevronLeft className="h-4 w-4" />
+          Previous
+        </Button>
+        <div className="text-center">
+          <p className="text-sm text-muted-foreground">
+            {currentIndex + 1} / {therapists.length}
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleNext}
+          disabled={currentIndex >= therapists.length - 1}
+          className="flex items-center gap-2"
+        >
+          Next
+          <ChevronRight className="h-4 w-4" />
+        </Button>
       </div>
     </div>
   )

@@ -179,7 +179,7 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-foreground mb-1">Email Us</h3>
                     <p className="text-muted-foreground text-sm mb-2">Send us an email anytime</p>
                     <a href="mailto:support@lux.com" className="text-primary hover:underline font-medium">
-                      support@lux.com
+                      support@luxmassage.vip
                     </a>
                   </div>
                 </div>

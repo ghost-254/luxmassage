@@ -27,8 +27,7 @@ export default function TherapistSignupPage() {
 
   function handleSignup(e) {
     e.preventDefault()
-    // Mock signup - redirect to therapist dashboard
-    router.push("/therapist")
+    router.push("/provider/dashboard")
   }
 
   return (

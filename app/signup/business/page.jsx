@@ -28,8 +28,7 @@ export default function BusinessSignupPage() {
 
   function handleSignup(e) {
     e.preventDefault()
-    // Mock signup - redirect to business dashboard
-    router.push("/business")
+    router.push("/business/dashboard")
   }
 
   return (
