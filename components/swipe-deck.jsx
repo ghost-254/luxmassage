@@ -83,7 +83,7 @@ export function SwipeDeck({ therapists }) {
           {prevTherapist && (
             <motion.div
               key={`prev-${prevTherapist.id}`}
-              className="absolute left-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
+              className="hidden md:block absolute left-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
               initial={{ x: -100, scale: 0.85 }}
               animate={{ x: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
@@ -94,7 +94,7 @@ export function SwipeDeck({ therapists }) {
 
           <motion.div
             key={`current-${currentTherapist.id}`}
-            className="absolute w-full h-full z-10"
+            className="absolute w-full h-full z-10 px-2 sm:px-0"
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.3 }}
@@ -105,7 +105,7 @@ export function SwipeDeck({ therapists }) {
           {nextTherapist && (
             <motion.div
               key={`next-${nextTherapist.id}`}
-              className="absolute right-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
+              className="hidden md:block absolute right-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
               initial={{ x: 100, scale: 0.85 }}
               animate={{ x: 0, scale: 0.9 }}
               transition={{ duration: 0.3 }}
@@ -116,14 +116,14 @@ export function SwipeDeck({ therapists }) {
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-6 py-8">
+      <div className="flex items-center justify-center gap-4 sm:gap-6 py-6 sm:py-8">
         <Button
           size="lg"
           variant="outline"
-          className="h-16 w-16 rounded-full border-2 border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600 bg-transparent"
+          className="h-12 w-12 sm:h-16 sm:w-16 rounded-full border-2 border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600 bg-transparent"
           onClick={() => handleButtonSwipe("left")}
         >
-          <X className="h-6 w-6" />
+          <X className="h-5 w-5 sm:h-6 sm:w-6" />
         </Button>
 
         <Dialog>
@@ -131,10 +131,10 @@ export function SwipeDeck({ therapists }) {
             <Button
               size="lg"
               variant="outline"
-              className="h-14 w-14 rounded-full border-2 border-[#6b4fe0] text-[#6b4fe0] hover:bg-[#6b4fe0]/10 bg-transparent"
+              className="h-10 w-10 sm:h-14 sm:w-14 rounded-full border-2 border-[#6b4fe0] text-[#6b4fe0] hover:bg-[#6b4fe0]/10 bg-transparent"
               onClick={() => setSelectedTherapist(currentTherapist)}
             >
-              <Info className="h-5 w-5" />
+              <Info className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
@@ -223,26 +223,27 @@ export function SwipeDeck({ therapists }) {
 
         <Button
           size="lg"
-          className="h-16 w-16 rounded-full gradient-primary text-white"
+          className="h-12 w-12 sm:h-16 sm:w-16 rounded-full gradient-primary text-white"
           onClick={() => handleButtonSwipe("right")}
         >
-          <Heart className="h-6 w-6" />
+          <Heart className="h-5 w-5 sm:h-6 sm:w-6" />
         </Button>
       </div>
 
-      <div className="flex items-center justify-center gap-4 pb-4">
+      <div className="flex items-center justify-center gap-3 sm:gap-4 pb-4">
         <Button
           variant="outline"
           size="sm"
           onClick={handlePrevious}
           disabled={currentIndex === 0}
-          className="flex items-center gap-2 bg-transparent"
+          className="flex items-center gap-1 sm:gap-2 bg-transparent text-xs sm:text-sm"
         >
-          <ChevronLeft className="h-4 w-4" />
-          Previous
+          <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+          <span className="hidden sm:inline">Previous</span>
+          <span className="sm:hidden">Prev</span>
         </Button>
         <div className="text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs sm:text-sm text-muted-foreground">
             {currentIndex + 1} / {therapists.length}
           </p>
         </div>
@@ -251,10 +252,11 @@ export function SwipeDeck({ therapists }) {
           size="sm"
           onClick={handleNext}
           disabled={currentIndex >= therapists.length - 1}
-          className="flex items-center gap-2"
+          className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
         >
-          Next
-          <ChevronRight className="h-4 w-4" />
+          <span className="hidden sm:inline">Next</span>
+          <span className="sm:hidden">Next</span>
+          <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
         </Button>
       </div>
     </div>

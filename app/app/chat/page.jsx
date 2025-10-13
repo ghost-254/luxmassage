@@ -51,9 +51,14 @@ export default function ChatPage() {
     <div className="min-h-screen pb-20 bg-background">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border/40">
-        <div className="mobile-container px-4 py-4">
-          <h1 className="font-serif text-2xl font-bold">Messages</h1>
-          <p className="text-sm text-muted-foreground">Chat with your therapists</p>
+        <div className="mobile-container px-4 py-4 flex items-center justify-between">
+          <div>
+            <h1 className="font-serif text-2xl font-bold">Messages</h1>
+            <p className="text-sm text-muted-foreground">Chat with your therapists</p>
+          </div>
+          <Link href="/">
+            <Image src="/logo.png" alt="Lux" width={40} height={40} className="h-10 w-10 cursor-pointer" />
+          </Link>
         </div>
       </div>
 
