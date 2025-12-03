@@ -131,7 +131,7 @@ export default function SwipePage() {
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="all">All Therapists</TabsTrigger>
               <TabsTrigger value="premium" className="gap-1.5">
-                <span>Premium Therapists</span>
+                <span>Premium Profiles</span>
                 <GoVerified className="h-4 w-4 text-yellow-500" />
               </TabsTrigger>
             </TabsList>

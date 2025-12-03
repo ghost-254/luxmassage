@@ -190,7 +190,7 @@ export default function ContactPage() {
                     <Phone className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground mb-1">Call Us</h3>
+                    <h3 className="font-semibold text-foreground mb-1">WhatsApp</h3>
                     <p className="text-muted-foreground text-sm mb-2">Available 24/7 for support</p>
                     <a href="tel:+1234567890" className="text-primary hover:underline font-medium">
                       +1 (234) 567-890
