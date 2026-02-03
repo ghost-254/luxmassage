@@ -77,7 +77,7 @@ export function Footer() {
             <div>
               <h3 className="font-semibold mb-4">Get in Touch</h3>
               <ul className="space-y-2">
-                <li className="text-sm text-muted-foreground">support@luxmassage.co.ke</li>
+                <li className="text-sm text-muted-foreground">support@luxmassage.vip</li>
                 <li className="text-sm text-muted-foreground">+254 700 000 000</li>
                 <li className="text-sm text-muted-foreground">Nairobi, Kenya</li>
               </ul>

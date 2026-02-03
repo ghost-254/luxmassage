@@ -178,7 +178,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">Email Us</h3>
                     <p className="text-muted-foreground text-sm mb-2">Send us an email anytime</p>
-                    <a href="mailto:support@lux.com" className="text-primary hover:underline font-medium">
+                    <a href="mailto:support@luxmassage.vip" className="text-primary hover:underline font-medium">
                       support@luxmassage.vip
                     </a>
                   </div>
@@ -192,8 +192,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">WhatsApp</h3>
                     <p className="text-muted-foreground text-sm mb-2">Available 24/7 for support</p>
-                    <a href="tel:+1234567890" className="text-primary hover:underline font-medium">
-                      +1 (234) 567-890
+                    <a href="tel:+254794152681" className="text-primary hover:underline font-medium">
+                      +254 7941 526 81
                     </a>
                   </div>
                 </div>
