@@ -58,7 +58,7 @@ export function TherapistCard({ therapist, onSwipe, isPreview = false }) {
       )}
 
       {/* Therapist Image */}
-      <div className="relative w-full h-[55%] sm:h-[60%]">
+      <div className="relative w-full h-[60%] lg:h-[65%]">
         <Image
           src={imageError ? "/placeholder.svg" : therapist.photo}
           alt={therapist.name}
@@ -100,7 +100,7 @@ export function TherapistCard({ therapist, onSwipe, isPreview = false }) {
       </div>
 
       {/* Info Section */}
-      <div className="p-4 sm:p-5 space-y-3 h-[45%] sm:h-[40%] overflow-y-auto">
+      <div className="p-4 sm:p-5 space-y-3 h-[40%] lg:h-[35%] overflow-y-auto thin-scrollbar">
         {/* Rating, Distance, Price Row */}
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-3 sm:gap-4">

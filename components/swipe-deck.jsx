@@ -76,7 +76,7 @@ export function SwipeDeck({ therapists }) {
   return (
     <div className="relative w-full h-full flex flex-col">
       {/* Card Stack */}
-      <div className="relative flex-1 w-full max-w-sm mx-auto px-2 sm:px-0">
+      <div className="relative flex-1 w-full mx-auto px-2 sm:px-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentTherapist.id}
