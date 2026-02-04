@@ -5,12 +5,13 @@ import { SwipeDeck } from "@/components/swipe-deck"
 import therapistsData from "@/data/therapists.json"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, Search, X } from "lucide-react"
+import { ArrowLeft, Search, X, SlidersHorizontal } from "lucide-react"
 import { GoVerified } from "react-icons/go"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { useState, useMemo } from "react"
 import { Country, City } from "country-state-city"
 
@@ -20,15 +21,14 @@ export default function SwipePage() {
   const [selectedCity, setSelectedCity] = useState("")
   const [selectedService, setSelectedService] = useState("")
   const [activeTab, setActiveTab] = useState("all")
+  const [showFilters, setShowFilters] = useState(false)
 
   const [countrySearch, setCountrySearch] = useState("")
   const [citySearch, setCitySearch] = useState("")
   const [serviceSearch, setServiceSearch] = useState("")
 
-  // Get all countries
   const countries = Country.getAllCountries()
 
-  // Get cities for selected country
   const cities = useMemo(() => {
     if (!selectedCountry) return []
     return City.getCitiesOfCountry(selectedCountry)
@@ -46,17 +46,14 @@ export default function SwipePage() {
 
   const filteredTherapists = useMemo(() => {
     let filtered = therapistsData.filter((therapist) => {
-      // Search by username or name
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
-        // If query starts with @, search only username
         if (query.startsWith("@")) {
           const usernameQuery = query.slice(1)
           if (!therapist.username.toLowerCase().includes(usernameQuery)) {
             return false
           }
         } else {
-          // Search both username and name
           const matchesUsername = therapist.username.toLowerCase().includes(query)
           const matchesName = therapist.name.toLowerCase().includes(query)
           if (!matchesUsername && !matchesName) {
@@ -65,21 +62,18 @@ export default function SwipePage() {
         }
       }
 
-      // Country filter
-      if (selectedCountry) {
+      if (selectedCountry && selectedCountry !== "all") {
         const country = countries.find((c) => c.isoCode === selectedCountry)
         if (therapist.location.country !== country?.name) {
           return false
         }
       }
 
-      // City filter
-      if (selectedCity && therapist.location.city !== selectedCity) {
+      if (selectedCity && selectedCity !== "all" && therapist.location.city !== selectedCity) {
         return false
       }
 
-      // Service filter
-      if (selectedService && !therapist.specialties.includes(selectedService)) {
+      if (selectedService && selectedService !== "all" && !therapist.specialties.includes(selectedService)) {
         return false
       }
 
@@ -97,7 +91,6 @@ export default function SwipePage() {
     })
   }, [searchQuery, selectedCountry, selectedCity, selectedService, countries, activeTab])
 
-  // Get unique services from all therapists
   const allServices = useMemo(() => {
     const services = new Set()
     therapistsData.forEach((therapist) => {
@@ -111,178 +104,243 @@ export default function SwipePage() {
     return allServices.filter((service) => service.toLowerCase().includes(serviceSearch.toLowerCase()))
   }, [allServices, serviceSearch])
 
+  const activeFiltersCount = [selectedCountry, selectedCity, selectedService].filter(v => v && v !== "all").length
+
+  function clearAllFilters() {
+    setSearchQuery("")
+    setSelectedCountry("")
+    setSelectedCity("")
+    setSelectedService("")
+  }
+
   return (
-    <div className="min-h-screen pb-20 bg-background">
-      <div className="sticky top-0 z-40 bg-muted/80 backdrop-blur-md border-b border-border/40">
-        <div className="mobile-container px-4 py-4 space-y-4">
-          {/* Header with back button and logo */}
+    <div className="min-h-screen pb-20 bg-gray-50">
+      {/* Header */}
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-lg mx-auto px-4 py-3 space-y-3">
+          {/* Top Row */}
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors">
+            <Link href="/" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Go Back to Main Page</span>
-              <span className="sm:hidden">Back</span>
+              <span className="hidden sm:inline">Back</span>
             </Link>
-            <Link href="/">
-              <Image src="/logo.png" alt="Lux" width={40} height={40} className="h-10 w-10 cursor-pointer" />
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/logo.png" alt="Lux" width={36} height={36} className="h-9 w-9" />
+              <span className="font-serif text-lg font-semibold text-purple-700">Lux</span>
             </Link>
+            <div className="w-12" />
           </div>
 
+          {/* Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="all">All Therapists</TabsTrigger>
-              <TabsTrigger value="premium" className="gap-1.5">
-                <span>Premium Profiles</span>
-                <GoVerified className="h-4 w-4 text-yellow-500" />
+            <TabsList className="grid w-full grid-cols-2 h-10 bg-gray-100 rounded-lg p-1">
+              <TabsTrigger value="all" className="text-sm rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm">
+                All Therapists
+              </TabsTrigger>
+              <TabsTrigger value="premium" className="flex items-center gap-1.5 text-sm rounded-md data-[state=active]:bg-white data-[state=active]:shadow-sm">
+                Premium
+                <GoVerified className="h-3.5 w-3.5 text-yellow-500" />
               </TabsTrigger>
             </TabsList>
           </Tabs>
 
+          {/* Search & Filter Row */}
           <div className="flex gap-2">
-            <div className="relative flex-1 min-w-[120px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none z-10" />
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search @username or name..."
+                placeholder="Search name or @username..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 text-sm h-10"
+                className="pl-9 h-10 text-sm bg-gray-50 border-gray-200 focus:bg-white"
               />
             </div>
+            
+            {/* Mobile Filter Button */}
+            <Sheet open={showFilters} onOpenChange={setShowFilters}>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon" className="h-10 w-10 relative border-gray-200 sm:hidden bg-transparent">
+                  <SlidersHorizontal className="h-4 w-4" />
+                  {activeFiltersCount > 0 && (
+                    <span className="absolute -top-1 -right-1 h-4 w-4 bg-purple-500 text-white text-[10px] rounded-full flex items-center justify-center">
+                      {activeFiltersCount}
+                    </span>
+                  )}
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="bottom" className="h-[70vh] rounded-t-2xl">
+                <SheetHeader>
+                  <SheetTitle>Filters</SheetTitle>
+                </SheetHeader>
+                <div className="space-y-4 mt-4">
+                  {/* Country */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Country</label>
+                    <Select
+                      value={selectedCountry}
+                      onValueChange={(value) => {
+                        setSelectedCountry(value)
+                        setSelectedCity("")
+                      }}
+                    >
+                      <SelectTrigger className="w-full h-11">
+                        <SelectValue placeholder="All Countries" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Countries</SelectItem>
+                        {countries.slice(0, 50).map((country) => (
+                          <SelectItem key={country.isoCode} value={country.isoCode}>
+                            {country.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-            <Select
-              value={selectedCountry}
-              onValueChange={(value) => {
-                setSelectedCountry(value)
-                setSelectedCity("")
-                setCountrySearch("")
-              }}
-            >
-              <SelectTrigger className="flex-1 min-w-[90px] text-xs h-10">
-                <SelectValue placeholder="Country" />
-              </SelectTrigger>
-              <SelectContent className="max-h-[300px]">
-                <div className="sticky top-0 bg-background p-2 border-b z-10">
-                  <div className="relative">
-                    <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
-                    <Input
-                      placeholder="Search country..."
-                      value={countrySearch}
-                      onChange={(e) => setCountrySearch(e.target.value)}
-                      className="pl-7 h-8 text-xs"
-                      onClick={(e) => e.stopPropagation()}
-                    />
+                  {/* City */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">City</label>
+                    <Select
+                      value={selectedCity}
+                      onValueChange={setSelectedCity}
+                      disabled={!selectedCountry || selectedCountry === "all"}
+                    >
+                      <SelectTrigger className="w-full h-11">
+                        <SelectValue placeholder="All Cities" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Cities</SelectItem>
+                        {cities.slice(0, 50).map((city) => (
+                          <SelectItem key={city.name} value={city.name}>
+                            {city.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Service */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Service</label>
+                    <Select value={selectedService} onValueChange={setSelectedService}>
+                      <SelectTrigger className="w-full h-11">
+                        <SelectValue placeholder="All Services" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Services</SelectItem>
+                        {allServices.map((service) => (
+                          <SelectItem key={service} value={service}>
+                            {service}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="flex gap-2 pt-4">
+                    <Button variant="outline" className="flex-1 bg-transparent" onClick={clearAllFilters}>
+                      Clear All
+                    </Button>
+                    <Button className="flex-1 bg-purple-600 hover:bg-purple-700" onClick={() => setShowFilters(false)}>
+                      Apply Filters
+                    </Button>
                   </div>
                 </div>
-                <div className="overflow-y-auto max-h-[200px] thin-scrollbar">
-                  <SelectItem value="all">All Countries</SelectItem>
-                  {filteredCountries.map((country) => (
+              </SheetContent>
+            </Sheet>
+
+            {/* Desktop Filters */}
+            <div className="hidden sm:flex gap-2">
+              <Select
+                value={selectedCountry}
+                onValueChange={(value) => {
+                  setSelectedCountry(value)
+                  setSelectedCity("")
+                }}
+              >
+                <SelectTrigger className="w-28 text-xs h-10 border-gray-200">
+                  <SelectValue placeholder="Country" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  {countries.slice(0, 50).map((country) => (
                     <SelectItem key={country.isoCode} value={country.isoCode}>
                       {country.name}
                     </SelectItem>
                   ))}
-                </div>
-              </SelectContent>
-            </Select>
+                </SelectContent>
+              </Select>
 
-            <Select
-              value={selectedCity}
-              onValueChange={(value) => {
-                setSelectedCity(value)
-                setCitySearch("")
-              }}
-              disabled={!selectedCountry || selectedCountry === "all"}
-            >
-              <SelectTrigger className="flex-1 min-w-[90px] text-xs h-10">
-                <SelectValue placeholder="City" />
-              </SelectTrigger>
-              <SelectContent className="max-h-[300px]">
-                <div className="sticky top-0 bg-background p-2 border-b z-10">
-                  <div className="relative">
-                    <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
-                    <Input
-                      placeholder="Search city..."
-                      value={citySearch}
-                      onChange={(e) => setCitySearch(e.target.value)}
-                      className="pl-7 h-8 text-xs"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  </div>
-                </div>
-                <div className="overflow-y-auto max-h-[200px] thin-scrollbar">
-                  <SelectItem value="all">All Cities</SelectItem>
-                  {filteredCities.map((city) => (
+              <Select
+                value={selectedCity}
+                onValueChange={setSelectedCity}
+                disabled={!selectedCountry || selectedCountry === "all"}
+              >
+                <SelectTrigger className="w-24 text-xs h-10 border-gray-200">
+                  <SelectValue placeholder="City" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  {cities.slice(0, 50).map((city) => (
                     <SelectItem key={city.name} value={city.name}>
                       {city.name}
                     </SelectItem>
                   ))}
-                </div>
-              </SelectContent>
-            </Select>
+                </SelectContent>
+              </Select>
 
-            <Select
-              value={selectedService}
-              onValueChange={(value) => {
-                setSelectedService(value)
-                setServiceSearch("")
-              }}
-            >
-              <SelectTrigger className="flex-1 min-w-[90px] text-xs h-10">
-                <SelectValue placeholder="Service" />
-              </SelectTrigger>
-              <SelectContent className="max-h-[300px]">
-                <div className="sticky top-0 bg-background p-2 border-b z-10">
-                  <div className="relative">
-                    <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
-                    <Input
-                      placeholder="Search service..."
-                      value={serviceSearch}
-                      onChange={(e) => setServiceSearch(e.target.value)}
-                      className="pl-7 h-8 text-xs"
-                      onClick={(e) => e.stopPropagation()}
-                    />
-                  </div>
-                </div>
-                <div className="overflow-y-auto max-h-[200px] thin-scrollbar">
-                  <SelectItem value="all">All Services</SelectItem>
-                  {filteredServices.map((service) => (
+              <Select value={selectedService} onValueChange={setSelectedService}>
+                <SelectTrigger className="w-28 text-xs h-10 border-gray-200">
+                  <SelectValue placeholder="Service" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All</SelectItem>
+                  {allServices.map((service) => (
                     <SelectItem key={service} value={service}>
                       {service}
                     </SelectItem>
                   ))}
-                </div>
-              </SelectContent>
-            </Select>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
-          {/* Clear filters button */}
-          {(searchQuery || selectedCountry || selectedCity || selectedService) && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="w-full text-xs h-8"
-              onClick={() => {
-                setSearchQuery("")
-                setSelectedCountry("")
-                setSelectedCity("")
-                setSelectedService("")
-              }}
-            >
-              <X className="h-3 w-3 mr-1" />
-              Clear All Filters
-            </Button>
+          {/* Active Filters */}
+          {(searchQuery || activeFiltersCount > 0) && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground">
+                {filteredTherapists.length} results
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 text-xs text-red-500 hover:text-red-600 hover:bg-red-50 ml-auto"
+                onClick={clearAllFilters}
+              >
+                <X className="h-3 w-3 mr-1" />
+                Clear
+              </Button>
+            </div>
           )}
         </div>
       </div>
 
-      <div className="mobile-container h-[calc(100vh-20rem)] sm:h-[calc(100vh-16rem)] py-6">
+      {/* Swipe Deck */}
+      <div className="max-w-lg mx-auto h-[calc(100vh-14rem)] sm:h-[calc(100vh-13rem)] py-4">
         {filteredTherapists.length > 0 ? (
           <SwipeDeck therapists={filteredTherapists} />
         ) : (
           <div className="flex flex-col items-center justify-center h-full text-center space-y-4 p-8">
-            <Search className="h-16 w-16 text-muted-foreground" />
-            <div className="space-y-2">
-              <h2 className="font-serif text-2xl font-bold">No therapists found</h2>
-              <p className="text-muted-foreground">Try adjusting your filters or search query</p>
+            <div className="h-16 w-16 rounded-full bg-gray-100 flex items-center justify-center">
+              <Search className="h-8 w-8 text-gray-400" />
             </div>
+            <div className="space-y-1">
+              <h2 className="font-serif text-xl font-bold">No therapists found</h2>
+              <p className="text-sm text-muted-foreground">Try adjusting your filters</p>
+            </div>
+            <Button variant="outline" onClick={clearAllFilters} className="text-sm bg-transparent">
+              Clear Filters
+            </Button>
           </div>
         )}
       </div>

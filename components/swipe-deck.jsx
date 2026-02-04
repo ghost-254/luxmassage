@@ -4,7 +4,7 @@ import { useState } from "react"
 import { TherapistCard } from "./therapist-card"
 import { Button } from "@/components/ui/button"
 import { X, Heart, MessageCircle, Info, ChevronLeft, ChevronRight } from "lucide-react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   Dialog,
   DialogContent,
@@ -16,17 +16,15 @@ import {
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { Star, MapPin, Award, Calendar } from "lucide-react"
+import { GoVerified } from "react-icons/go"
 
 export function SwipeDeck({ therapists }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [liked, setLiked] = useState([])
   const [skipped, setSkipped] = useState([])
   const [selectedTherapist, setSelectedTherapist] = useState(null)
-  const [swipeHistory, setSwipeHistory] = useState([])
 
   const currentTherapist = therapists[currentIndex]
-  const prevTherapist = currentIndex > 0 ? therapists[currentIndex - 1] : null
-  const nextTherapist = currentIndex < therapists.length - 1 ? therapists[currentIndex + 1] : null
 
   function handleSwipe(direction) {
     if (direction === "right") {
@@ -34,7 +32,6 @@ export function SwipeDeck({ therapists }) {
     } else {
       setSkipped([...skipped, currentTherapist.id])
     }
-    setSwipeHistory([...swipeHistory, currentIndex])
     setCurrentIndex((prev) => prev + 1)
   }
 
@@ -56,20 +53,20 @@ export function SwipeDeck({ therapists }) {
 
   if (currentIndex >= therapists.length) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-center space-y-6 p-8">
+      <div className="flex flex-col items-center justify-center h-full text-center space-y-6 p-6">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", duration: 0.5 }}
-          className="h-24 w-24 rounded-full bg-gradient-to-r from-[#e91e8c] via-[#6b4fe0] to-[#00d9c0] flex items-center justify-center"
+          className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center shadow-lg"
         >
-          <Heart className="h-12 w-12 text-white" />
+          <Heart className="h-10 w-10 sm:h-12 sm:w-12 text-white" />
         </motion.div>
         <div className="space-y-2">
-          <h2 className="font-serif text-2xl font-bold">You've seen everyone!</h2>
-          <p className="text-muted-foreground">Check back later for new therapists</p>
+          <h2 className="font-serif text-xl sm:text-2xl font-bold">You've seen everyone!</h2>
+          <p className="text-muted-foreground text-sm">Check back later for new therapists</p>
         </div>
-        <Button onClick={() => setCurrentIndex(0)} className="gradient-primary text-white">
+        <Button onClick={() => setCurrentIndex(0)} className="bg-purple-600 hover:bg-purple-700 text-white">
           Start Over
         </Button>
       </div>
@@ -78,82 +75,74 @@ export function SwipeDeck({ therapists }) {
 
   return (
     <div className="relative w-full h-full flex flex-col">
-      <div className="relative flex-1 w-full max-w-md mx-auto flex items-center justify-center">
-        <div className="relative w-full h-full flex items-center justify-center">
-          {prevTherapist && (
-            <motion.div
-              key={`prev-${prevTherapist.id}`}
-              className="hidden md:block absolute left-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
-              initial={{ x: -100, scale: 0.85 }}
-              animate={{ x: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              <TherapistCard therapist={prevTherapist} onSwipe={() => {}} isPreview={true} />
-            </motion.div>
-          )}
-
+      {/* Card Stack */}
+      <div className="relative flex-1 w-full max-w-sm mx-auto px-2 sm:px-0">
+        <AnimatePresence mode="wait">
           <motion.div
-            key={`current-${currentTherapist.id}`}
-            className="absolute w-full h-full z-10 px-2 sm:px-0"
-            initial={{ scale: 0.9, opacity: 0 }}
+            key={currentTherapist.id}
+            className="absolute inset-0"
+            initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.3 }}
+            exit={{ scale: 0.95, opacity: 0 }}
+            transition={{ duration: 0.2 }}
           >
             <TherapistCard therapist={currentTherapist} onSwipe={handleSwipe} />
           </motion.div>
-
-          {nextTherapist && (
-            <motion.div
-              key={`next-${nextTherapist.id}`}
-              className="hidden md:block absolute right-[-15%] w-[75%] h-[90%] blur-sm pointer-events-none z-0"
-              initial={{ x: 100, scale: 0.85 }}
-              animate={{ x: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              <TherapistCard therapist={nextTherapist} onSwipe={() => {}} isPreview={true} />
-            </motion.div>
-          )}
-        </div>
+        </AnimatePresence>
       </div>
 
-      <div className="flex items-center justify-center gap-4 sm:gap-6 py-6 sm:py-8">
+      {/* Action Buttons */}
+      <div className="flex items-center justify-center gap-3 sm:gap-5 py-4 sm:py-6">
+        {/* Skip Button */}
         <Button
           size="lg"
           variant="outline"
-          className="h-12 w-12 sm:h-16 sm:w-16 rounded-full border-2 border-red-500 text-red-500 hover:bg-red-50 hover:text-red-600 bg-transparent"
+          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full border-2 border-red-400 text-red-500 hover:bg-red-50 hover:text-red-600 bg-white shadow-md"
           onClick={() => handleButtonSwipe("left")}
         >
           <X className="h-5 w-5 sm:h-6 sm:w-6" />
         </Button>
 
+        {/* Info Button */}
         <Dialog>
           <DialogTrigger asChild>
             <Button
               size="lg"
               variant="outline"
-              className="h-10 w-10 sm:h-14 sm:w-14 rounded-full border-2 border-[#6b4fe0] text-[#6b4fe0] hover:bg-[#6b4fe0]/10 bg-transparent"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-2 border-purple-400 text-purple-500 hover:bg-purple-50 bg-white shadow-md"
               onClick={() => setSelectedTherapist(currentTherapist)}
             >
               <Info className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-md max-h-[85vh] overflow-y-auto mx-4 rounded-2xl">
             {selectedTherapist && (
-              <div className="space-y-6">
-                <div className="relative h-64 w-full rounded-xl overflow-hidden">
+              <div className="space-y-5">
+                <div className="relative h-56 sm:h-64 w-full rounded-xl overflow-hidden">
                   <Image
                     src={selectedTherapist.photo || "/placeholder.svg"}
                     alt={selectedTherapist.name}
                     fill
                     className="object-cover"
                   />
+                  {selectedTherapist.premium && (
+                    <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold">
+                      <GoVerified className="h-3.5 w-3.5" />
+                      Premium
+                    </div>
+                  )}
                 </div>
 
                 <DialogHeader>
-                  <DialogTitle className="font-serif text-2xl">{selectedTherapist.name}</DialogTitle>
-                  <DialogDescription className="flex items-center gap-4 text-base">
+                  <DialogTitle className="font-serif text-xl sm:text-2xl flex items-center gap-2">
+                    {selectedTherapist.name}
+                    {selectedTherapist.verified && (
+                      <GoVerified className="h-5 w-5 text-blue-500" />
+                    )}
+                  </DialogTitle>
+                  <DialogDescription className="flex items-center gap-3 text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-[#e91e8c] text-[#e91e8c]" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                       <span className="font-medium text-foreground">{selectedTherapist.rating}</span>
                       <span>({selectedTherapist.reviews})</span>
                     </div>
@@ -162,20 +151,20 @@ export function SwipeDeck({ therapists }) {
                       <span>{selectedTherapist.distance}</span>
                     </div>
                   </DialogDescription>
-                  <p className="text-sm text-muted-foreground">@{selectedTherapist.username}</p>
+                  <p className="text-xs text-muted-foreground">@{selectedTherapist.username}</p>
                 </DialogHeader>
 
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold mb-2">About</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{selectedTherapist.bio}</p>
+                    <h3 className="font-semibold text-sm mb-1.5">About</h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{selectedTherapist.bio}</p>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold mb-2">Specialties</h3>
-                    <div className="flex flex-wrap gap-2">
+                    <h3 className="font-semibold text-sm mb-1.5">Specialties</h3>
+                    <div className="flex flex-wrap gap-1.5">
                       {selectedTherapist.specialties.map((specialty, index) => (
-                        <Badge key={index} variant="secondary">
+                        <Badge key={index} variant="secondary" className="text-xs bg-purple-50 text-purple-700">
                           {specialty}
                         </Badge>
                       ))}
@@ -183,34 +172,34 @@ export function SwipeDeck({ therapists }) {
                   </div>
 
                   <div>
-                    <h3 className="font-semibold mb-2">Certifications</h3>
-                    <div className="space-y-2">
+                    <h3 className="font-semibold text-sm mb-1.5">Certifications</h3>
+                    <div className="space-y-1.5">
                       {selectedTherapist.certifications.map((cert, index) => (
-                        <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <Award className="h-4 w-4 text-[#00d9c0]" />
+                        <div key={index} className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <Award className="h-3.5 w-3.5 text-purple-500" />
                           <span>{cert}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t">
+                  <div className="flex items-center justify-between pt-3 border-t">
                     <div>
                       <p className="text-xs text-muted-foreground">Experience</p>
-                      <p className="font-semibold">{selectedTherapist.yearsExperience} years</p>
+                      <p className="font-semibold text-sm">{selectedTherapist.yearsExperience} years</p>
                     </div>
                     <div className="text-right">
                       <p className="text-xs text-muted-foreground">Starting from</p>
-                      <p className="text-xl font-bold text-[#e91e8c]">{selectedTherapist.price}</p>
+                      <p className="text-lg font-bold text-purple-600">{selectedTherapist.price}</p>
                     </div>
                   </div>
 
                   <div className="flex gap-2 pt-2">
-                    <Button className="flex-1 gradient-primary text-white">
+                    <Button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-sm">
                       <Calendar className="h-4 w-4 mr-2" />
                       Book Now
                     </Button>
-                    <Button variant="outline" className="flex-1 bg-transparent">
+                    <Button variant="outline" className="flex-1 text-sm bg-transparent">
                       <MessageCircle className="h-4 w-4 mr-2" />
                       Message
                     </Button>
@@ -221,42 +210,52 @@ export function SwipeDeck({ therapists }) {
           </DialogContent>
         </Dialog>
 
+        {/* Like Button */}
         <Button
           size="lg"
-          className="h-12 w-12 sm:h-16 sm:w-16 rounded-full gradient-primary text-white"
+          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg"
           onClick={() => handleButtonSwipe("right")}
         >
           <Heart className="h-5 w-5 sm:h-6 sm:w-6" />
         </Button>
       </div>
 
-      <div className="flex items-center justify-center gap-3 sm:gap-4 pb-4">
+      {/* Navigation */}
+      <div className="flex items-center justify-center gap-4 pb-4">
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={handlePrevious}
           disabled={currentIndex === 0}
-          className="flex items-center gap-1 sm:gap-2 bg-transparent text-xs sm:text-sm"
+          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground disabled:opacity-40"
         >
-          <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-          <span className="hidden sm:inline">Previous</span>
-          <span className="sm:hidden">Prev</span>
+          <ChevronLeft className="h-4 w-4" />
+          Prev
         </Button>
-        <div className="text-center">
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            {currentIndex + 1} / {therapists.length}
-          </p>
+        <div className="flex items-center gap-1.5">
+          {therapists.slice(Math.max(0, currentIndex - 2), Math.min(therapists.length, currentIndex + 3)).map((_, i) => {
+            const actualIndex = Math.max(0, currentIndex - 2) + i
+            return (
+              <div
+                key={actualIndex}
+                className={`h-1.5 rounded-full transition-all ${
+                  actualIndex === currentIndex 
+                    ? "w-6 bg-purple-500" 
+                    : "w-1.5 bg-gray-300"
+                }`}
+              />
+            )
+          })}
         </div>
         <Button
-          variant="outline"
+          variant="ghost"
           size="sm"
           onClick={handleNext}
           disabled={currentIndex >= therapists.length - 1}
-          className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
+          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground disabled:opacity-40"
         >
-          <span className="hidden sm:inline">Next</span>
-          <span className="sm:hidden">Next</span>
-          <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
+          Next
+          <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
     </div>

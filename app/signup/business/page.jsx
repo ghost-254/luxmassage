@@ -45,7 +45,7 @@ export default function BusinessSignupPage() {
             className="hidden md:flex md:w-2/5 relative"
           >
             <Image
-              src="/massage-background.jpg"
+              src="/wellnessct.png"
               alt="Spa and wellness"
               fill
               className="object-cover"

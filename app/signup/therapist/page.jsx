@@ -44,10 +44,10 @@ export default function TherapistSignupPage() {
             className="hidden md:flex md:w-2/5 relative"
           >
             <Image
-              src="/massage-background.jpg"
+              src="/therapistbg.png"
               alt="Massage therapy"
               fill
-              className="object-cover"
+              className="object-fit"
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-br from-purple-700/80 via-purple-600/70 to-pink-600/80" />
@@ -168,7 +168,6 @@ export default function TherapistSignupPage() {
                     <Label htmlFor="specialization" className="text-xs font-medium">Specialization</Label>
                     <Select onValueChange={(value) => setFormData({ ...formData, specialization: value })}>
                       <SelectTrigger className="h-9 text-sm">
-                        <Briefcase className="absolute left-2.5 h-3.5 w-3.5 text-muted-foreground" />
                         <SelectValue placeholder="Select" />
                       </SelectTrigger>
                       <SelectContent>
