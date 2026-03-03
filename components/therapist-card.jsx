@@ -58,12 +58,12 @@ export function TherapistCard({ therapist, onSwipe, isPreview = false }) {
       )}
 
       {/* Therapist Image */}
-      <div className="relative w-full h-[60%] lg:h-[65%]">
+      <div className="relative w-full h-[64%] lg:h-[68%] bg-gradient-to-b from-gray-100 to-gray-50">
         <Image
           src={imageError ? "/placeholder.svg" : therapist.photo}
           alt={therapist.name}
           fill
-          className="object-cover"
+          className="object-contain object-center"
           onError={() => setImageError(true)}
           priority
         />
@@ -73,8 +73,8 @@ export function TherapistCard({ therapist, onSwipe, isPreview = false }) {
         
         {/* Premium Badge */}
         {therapist.premium && (
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
-            <GoVerified className="h-3.5 w-3.5" />
+          <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-600 via-yellow-500 to-orange-500 px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-amber-200/80 shadow-[0_10px_24px_rgba(180,83,9,0.35)]">
+            <GoVerified className="h-3.5 w-3.5 text-yellow-50 drop-shadow-[0_1px_2px_rgba(120,53,15,0.8)]" />
             <span>Premium</span>
           </div>
         )}
@@ -92,7 +92,7 @@ export function TherapistCard({ therapist, onSwipe, isPreview = false }) {
           <div className="flex items-center gap-2">
             <h2 className="text-xl sm:text-2xl font-bold truncate">{therapist.name}</h2>
             {therapist.verified && (
-              <GoVerified className="h-5 w-5 text-blue-400 flex-shrink-0" />
+              <GoVerified className="h-5 w-5 flex-shrink-0 text-[#5FB0FF] drop-shadow-[0_0_6px_rgba(30,64,175,0.9)]" />
             )}
           </div>
           <p className="text-sm text-white/80">@{therapist.username}</p>
@@ -100,7 +100,7 @@ export function TherapistCard({ therapist, onSwipe, isPreview = false }) {
       </div>
 
       {/* Info Section */}
-      <div className="p-4 sm:p-5 space-y-3 h-[40%] lg:h-[35%] overflow-y-auto thin-scrollbar">
+      <div className="p-4 sm:p-5 space-y-3 h-[36%] lg:h-[32%] overflow-y-auto thin-scrollbar">
         {/* Rating, Distance, Price Row */}
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-3 sm:gap-4">

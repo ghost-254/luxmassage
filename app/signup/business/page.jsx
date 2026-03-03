@@ -153,7 +153,7 @@ export default function BusinessSignupPage() {
                       <Input
                         id="phone"
                         type="tel"
-                        placeholder="+254 700 000 000"
+                        placeholder="+1 000 000 0000"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="pl-8 h-9 text-sm border-gray-200 focus:border-teal-500"
@@ -187,12 +187,12 @@ export default function BusinessSignupPage() {
                         <SelectValue placeholder="Select city" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="nairobi">Nairobi</SelectItem>
-                        <SelectItem value="mombasa">Mombasa</SelectItem>
-                        <SelectItem value="kisumu">Kisumu</SelectItem>
-                        <SelectItem value="nakuru">Nakuru</SelectItem>
-                        <SelectItem value="eldoret">Eldoret</SelectItem>
-                        <SelectItem value="thika">Thika</SelectItem>
+                        <SelectItem value="new-york">New York</SelectItem>
+                        <SelectItem value="london">London</SelectItem>
+                        <SelectItem value="dubai">Dubai</SelectItem>
+                        <SelectItem value="singapore">Singapore</SelectItem>
+                        <SelectItem value="los-angeles">Los Angeles</SelectItem>
+                        <SelectItem value="toronto">Toronto</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

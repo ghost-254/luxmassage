@@ -78,14 +78,12 @@ export function Footer() {
               <h3 className="font-semibold mb-4">Get in Touch</h3>
               <ul className="space-y-2">
                 <li className="text-sm text-muted-foreground">support@luxmassage.vip</li>
-                <li className="text-sm text-muted-foreground">+254 700 000 000</li>
-                <li className="text-sm text-muted-foreground">Nairobi, Kenya</li>
               </ul>
             </div>
           </div>
 
           <div className="mt-8 pt-8 border-t border-border/40 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Lux. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} LuxMassage. All rights reserved.</p>
           </div>
         </div>
       </div>

@@ -1,92 +1,148 @@
-import React from "react";
+import React from "react"
+
+const sections = [
+  {
+    title: "1. Scope and Role",
+    content: [
+      "This Privacy Policy explains how Lux collects, uses, shares, and protects personal data when you use our website, apps, and related services.",
+      "Depending on how you use Lux, we may act as a data controller for platform operations and as a data processor for certain provider or business workflows.",
+    ],
+  },
+  {
+    title: "2. Information We Collect",
+    content: [
+      "Account and profile data: name, email, phone number, profile media, preferences, and account credentials.",
+      "Booking and transaction data: appointment details, pricing, invoices, payment status, refund and dispute records.",
+      "Verification and trust data: identity checks, certification or licensing records (where required), and fraud-prevention signals.",
+      "Usage and device data: browser/app activity, IP address, device identifiers, operating system, and event logs.",
+      "Communications data: support messages, service-related notifications, and feedback submissions.",
+    ],
+  },
+  {
+    title: "3. How We Use Personal Data",
+    content: [
+      "To create and manage accounts, process bookings, and provide customer support.",
+      "To enable providers and businesses to receive booking requests, manage schedules, and fulfill services.",
+      "To process payments, prevent fraud, enforce platform rules, and handle refunds or disputes.",
+      "To improve reliability, monitor performance, and enhance product features and user experience.",
+      "To send transactional communications and, where permitted, marketing communications.",
+    ],
+  },
+  {
+    title: "4. Legal Bases for Processing",
+    content: [
+      "Contract performance: to deliver the services you request.",
+      "Legitimate interests: safety, fraud prevention, platform analytics, and service quality.",
+      "Legal obligations: compliance with tax, accounting, regulatory, and law-enforcement requests.",
+      "Consent: where required by applicable law (for example, optional marketing or cookie categories).",
+    ],
+  },
+  {
+    title: "5. Cookies and Similar Technologies",
+    content: [
+      "Lux uses cookies and similar technologies to keep sessions active, remember preferences, measure usage, and improve performance.",
+      "You can manage cookie settings through your browser or device controls. Disabling certain cookies may affect feature availability.",
+    ],
+  },
+  {
+    title: "6. How We Share Information",
+    content: [
+      "With providers and businesses: booking-relevant information needed to deliver services safely and effectively.",
+      "With service providers: payment processors, cloud hosting vendors, analytics providers, messaging partners, and security vendors under contractual safeguards.",
+      "For legal and safety reasons: where disclosure is required by law, court order, or to protect rights, safety, and platform integrity.",
+      "During business transfers: in connection with mergers, acquisitions, financing, or asset sales, subject to confidentiality protections.",
+    ],
+  },
+  {
+    title: "7. Data Retention",
+    content: [
+      "We retain personal data only as long as necessary for the purposes described in this Policy, including legal, tax, accounting, and dispute-resolution obligations.",
+      "Retention periods may differ by data type, account status, and applicable jurisdictional requirements.",
+    ],
+  },
+  {
+    title: "8. International Data Transfers",
+    content: [
+      "Lux may process data in multiple countries. When personal data is transferred across borders, we apply appropriate safeguards required by applicable law.",
+    ],
+  },
+  {
+    title: "9. Security",
+    content: [
+      "We use administrative, technical, and organizational measures to protect personal data from unauthorized access, alteration, disclosure, and destruction.",
+      "No system is completely secure. You are responsible for safeguarding your account credentials and reporting suspected unauthorized access immediately.",
+    ],
+  },
+  {
+    title: "10. Your Privacy Rights",
+    content: [
+      "Depending on your location, you may have rights to access, correct, delete, restrict, or object to processing of your personal data, and to request portability.",
+      "You may also withdraw consent where processing relies on consent, without affecting prior lawful processing.",
+      "To exercise rights, contact us using the details below. We may verify your identity before fulfilling requests.",
+    ],
+  },
+  {
+    title: "11. Children's Privacy",
+    content: [
+      "Lux is intended for adults and is not directed to children under 18. We do not knowingly collect personal data from children under 18.",
+      "If you believe a child has provided personal data, contact us so we can investigate and delete data where required.",
+    ],
+  },
+  {
+    title: "12. Third-Party Links and Services",
+    content: [
+      "Our platform may link to third-party websites or services. Their privacy practices are governed by their own policies, not this Privacy Policy.",
+    ],
+  },
+  {
+    title: "13. Changes to This Privacy Policy",
+    content: [
+      "We may update this Privacy Policy periodically. Material changes will be posted with a revised Effective Date.",
+      "Continued use of Lux after updates take effect constitutes acknowledgment of the revised Policy.",
+    ],
+  },
+]
 
 const PrivacyPolicy = () => {
   return (
-    <section id="privacy-policy" className="py-20 bg-gray-10">
-      <div className="max-container padding-container">
-        <h2 className="text-center bold-40 mb-10">Privacy Policy</h2>
-        <p className="regular-16 text-gray-30 mb-4">
-            At Lux, we are committed to protecting the privacy and security of our users' personal information. This Privacy Policy outlines how we collect, use, and safeguard the information you provide to us through our online massage booking service.
-        </p>
+    <section id="privacy-policy" className="py-16 md:py-20 bg-background">
+      <div className="mobile-container px-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-center mb-4">Privacy Policy</h1>
+          <p className="text-center text-muted-foreground mb-2">Effective Date: March 2, 2026</p>
+          <p className="text-center text-sm text-muted-foreground mb-12">
+            This Policy describes how Lux handles personal information across our platform.
+          </p>
 
-        <div className="grid lg:grid-cols-1 gap-y-8 lg:gap-x-16 items-center">
-          <div>
-            <h3 className="bold-32 mb-4">1. Information We Collect</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. Personal Information: When you use Lux's service, we may collect personal information such as your name, email address, phone number, and payment details.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. Verification Information: To ensure the safety of our masseuses, we may collect verification information such as a copy of your National ID and proof of accommodation reservation.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              c. Usage Information: We may collect information about how you interact with our service, including your browsing and booking activities.
-            </p>
-
-          </div>
-          <div>
-            <h3 className="bold-32 mb-4">2. How We Use Your Information</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. To Provide Services: We use your personal information to facilitate massage appointments, process payments, and communicate with you about your bookings.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. Safety and Security: Verification information is used to verify your identity and ensure the safety of our masseuses during appointments.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              c. Improve Our Service: We analyze usage information to improve the functionality and user experience of our service.
-            </p>
+          <div className="space-y-8">
+            {sections.map((section) => (
+              <div key={section.title} className="rounded-2xl border border-border/60 bg-card p-6 md:p-8">
+                <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-4">{section.title}</h2>
+                <div className="space-y-3">
+                  {section.content.map((line) => (
+                    <p key={line} className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div>
-            <h3 className="bold-32 mb-4">3. Information Sharing</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. Third-Party Service Providers: We may share your information with third-party service providers who assist us in operating our service, processing payments, or performing other business functions.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. Legal Requirements: We may disclose your information in response to a legal request or to comply with applicable laws, regulations, or legal processes.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">4. Data Security</h3>
-            <p className="regular-16 text-gray-30">
-              We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, please note that no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">5. Your Rights and Choices</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. Access and Correction: You have the right to access and correct any inaccuracies in your personal information held by Lux.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. Opt-Out: You may opt out of receiving promotional communications from us by following the instructions provided in the communication or by contacting us directly.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">6. Children's Privacy</h3>
-            <p className="regular-16 text-gray-30">
-              Lux's service is not intended for use by children under the age of 18. We do not knowingly collect personal information from children under 18. If you are a parent or guardian and believe that your child has provided us with personal information, please contact us to request deletion of that information.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">7. Changes to This Privacy Policy</h3>
-            <p className="regular-16 text-gray-30">
-              We reserve the right to modify this Privacy Policy at any time without prior notice. Your continued use of the Service after modifications will constitute your acceptance of the revised Privacy Policy. We will notify you of any material changes by posting the updated policy on our website or through other appropriate means.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">8. Contact Us</h3>
-            <p className="regular-16 text-gray-30">
-              If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at <a href="mailto:info@luxxtouch.com" className="text-blue-500 hover:underline-offset-1 hover:underline">info@luxxtouch.com</a>. By using Lux's service, you consent to the collection, use, and disclosure of your personal information as described in this Privacy Policy.
+          <div className="mt-10 rounded-2xl border border-border/60 bg-card p-6 md:p-8">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-4">14. Contact Us</h2>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+              For privacy questions or data rights requests, email{" "}
+              <a href="mailto:support@luxmassage.vip" className="text-primary hover:underline">
+                support@luxmassage.vip
+              </a>
+              .
             </p>
           </div>
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default PrivacyPolicy;
+export default PrivacyPolicy

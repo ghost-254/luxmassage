@@ -137,7 +137,7 @@ export default function TherapistSignupPage() {
                       <Input
                         id="phone"
                         type="tel"
-                        placeholder="+254 700 000 000"
+                        placeholder="+1 000 000 0000"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="pl-8 h-9 text-sm border-gray-200 focus:border-purple-500"

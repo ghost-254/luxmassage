@@ -14,7 +14,7 @@ type PaymentMethod = "visa" | "crypto" | "mpesa"
 const subscriptionPlans = [
   {
     name: "Free",
-    price: "Ksh 0",
+    price: "$0",
     description: "Get started with basic features",
     features: ["Up to 10 active clients", "Basic profile", "Standard support", "Limited booking slots"],
     color: "from-gray-500 to-gray-600",
@@ -22,7 +22,7 @@ const subscriptionPlans = [
   },
   {
     name: "Basic",
-    price: "Ksh 2,999",
+    price: "$2,999",
     period: "/month",
     description: "Grow your practice",
     features: [
@@ -39,7 +39,7 @@ const subscriptionPlans = [
   },
   {
     name: "Premium",
-    price: "Ksh 9,999",
+    price: "$9,999",
     period: "/month",
     description: "Maximize your reach",
     features: [
@@ -73,9 +73,9 @@ const paymentMethods: { id: PaymentMethod; name: string; icon: string; descripti
   },
   {
     id: "mpesa",
-    name: "M-Pesa",
+    name: "Mobile Wallet",
     icon: "📱",
-    description: "Mobile money (Kenya)",
+    description: "Mobile wallet",
   },
 ]
 
@@ -222,3 +222,4 @@ export default function SubscriptionPage() {
     </div>
   )
 }
+

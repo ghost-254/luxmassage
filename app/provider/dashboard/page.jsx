@@ -15,13 +15,13 @@ export default function ProviderDashboard() {
   const provider = {
     name: "Amina Wanjiku",
     email: "amina@example.com",
-    phone: "+254 712 345 678",
+    phone: "+1 415 555 0135",
     photo: "/placeholder.svg?height=200&width=200",
     rating: 4.8,
     totalSessions: 342,
     yearsExperience: 8,
     specialties: ["Swedish", "Aromatherapy", "Deep Tissue"],
-    location: "Westlands, Nairobi",
+    location: "Downtown District",
     subscriptionTier: "Standard",
   }
 
@@ -40,7 +40,7 @@ export default function ProviderDashboard() {
       date: "Today",
       time: "2:00 PM",
       duration: "60 min",
-      price: "Ksh 2,500",
+      price: "$2,500",
       status: "confirmed",
     },
     {
@@ -50,7 +50,7 @@ export default function ProviderDashboard() {
       date: "Today",
       time: "4:30 PM",
       duration: "90 min",
-      price: "Ksh 3,500",
+      price: "$3,500",
       status: "confirmed",
     },
     {
@@ -60,7 +60,7 @@ export default function ProviderDashboard() {
       date: "Tomorrow",
       time: "10:00 AM",
       duration: "60 min",
-      price: "Ksh 2,500",
+      price: "$2,500",
       status: "pending",
     },
   ]
@@ -133,3 +133,4 @@ export default function ProviderDashboard() {
     </div>
   )
 }
+

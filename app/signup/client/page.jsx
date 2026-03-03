@@ -145,10 +145,10 @@ export default function ClientSignupPage() {
                   <Label htmlFor="phone" className="text-xs md:text-sm font-medium">Phone Number</Label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="+254 700 000 000"
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="+1 000 000 0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="pl-10 h-10 border-gray-200 focus:border-purple-500 focus:ring-purple-500"

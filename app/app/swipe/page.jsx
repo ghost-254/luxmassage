@@ -16,16 +16,23 @@ import { Check, ChevronsUpDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { Country, City } from "country-state-city"
 import { User, LogOut } from "lucide-react"
+import { useSearchParams } from "next/navigation"
 
 export default function SwipePage() {
+  const searchParams = useSearchParams()
+  const requestedTab = searchParams.get("tab")
+  const requestedTherapist = searchParams.get("therapist") || ""
+
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedCountry, setSelectedCountry] = useState("")
   const [selectedCity, setSelectedCity] = useState("")
   const [selectedService, setSelectedService] = useState("")
-  const [activeTab, setActiveTab] = useState("all")
+  const [activeTab, setActiveTab] = useState(
+    requestedTab === "premium" || (!requestedTab && requestedTherapist) ? "premium" : "all",
+  )
   const [showFilters, setShowFilters] = useState(false)
   const [openCountry, setOpenCountry] = useState(false)
   const [openCity, setOpenCity] = useState(false)
@@ -95,6 +102,17 @@ export default function SwipePage() {
 
   const activeFiltersCount = [selectedCountry, selectedCity, selectedService].filter(v => v && v !== "all").length
 
+  useEffect(() => {
+    if (requestedTab === "premium" || (!requestedTab && requestedTherapist)) {
+      setActiveTab("premium")
+      return
+    }
+
+    if (requestedTab === "all") {
+      setActiveTab("all")
+    }
+  }, [requestedTab, requestedTherapist])
+
   function clearAllFilters() {
     setSearchQuery("")
     setSelectedCountry("")
@@ -103,9 +121,9 @@ export default function SwipePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:bg-white">
+    <div className="min-h-dvh app-shell overflow-x-hidden lg:h-dvh lg:overflow-hidden">
       {/* Mobile Header - Only shows on mobile */}
-      <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-gray-100">
+      <div className="lg:hidden sticky top-0 z-40 app-mobile-header">
         <div className="flex items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Lux" width={32} height={32} className="h-8 w-8" />
@@ -356,7 +374,7 @@ export default function SwipePage() {
               </TabsTrigger>
               <TabsTrigger value="premium" className="flex items-center gap-1.5 text-sm rounded-full data-[state=active]:bg-white data-[state=active]:shadow-sm">
                 Premium
-                <GoVerified className="h-3.5 w-3.5 text-yellow-500" />
+                <GoVerified className="h-3.5 w-3.5 text-amber-600 drop-shadow-[0_1px_1px_rgba(120,53,15,0.4)]" />
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -364,9 +382,9 @@ export default function SwipePage() {
       </div>
 
       {/* Main Layout */}
-      <div className="flex h-[calc(100vh-120px)] lg:h-screen">
+      <div className="flex h-[calc(100dvh-120px)] lg:h-full">
         {/* Left Side Panel - Desktop Only */}
-        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col border-r border-gray-100 bg-white h-screen sticky top-0">
+        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col border-r border-gray-100 bg-white h-screen sticky top-0 app-desktop-sidebar">
           {/* Panel Header */}
           <div className="p-6 border-b border-gray-100">
             <div className="flex items-center justify-between mb-6">
@@ -623,7 +641,7 @@ export default function SwipePage() {
           </div>
 
           {/* Panel Footer - User Info & Logout */}
-          <div className="p-4 border-t border-gray-100 bg-gray-50 space-y-3">
+          <div className="p-4 border-t border-gray-100 bg-gray-50 space-y-3 app-sidebar-footer">
             <div className="flex items-center gap-3 px-2">
               <div className="h-9 w-9 rounded-full bg-purple-100 flex items-center justify-center">
                 <User className="h-5 w-5 text-purple-600" />
@@ -645,9 +663,9 @@ export default function SwipePage() {
         </aside>
 
         {/* Right Side - Swipe Deck */}
-        <main className="flex-1 flex flex-col bg-gray-50 lg:bg-gradient-to-br lg:from-purple-50 lg:via-white lg:to-pink-50">
+        <main className="flex-1 flex flex-col app-main-panel lg:h-full lg:overflow-hidden">
           {/* Desktop Tabs Header */}
-          <div className="hidden lg:flex items-center justify-center py-4 px-6 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+          <div className="hidden lg:flex items-center justify-center py-4 px-6 app-topbar">
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="h-11 bg-gray-100 rounded-full p-1">
                 <TabsTrigger value="all" className="px-6 text-sm rounded-full data-[state=active]:bg-white data-[state=active]:shadow-sm">
@@ -655,17 +673,17 @@ export default function SwipePage() {
                 </TabsTrigger>
                 <TabsTrigger value="premium" className="flex items-center gap-2 px-6 text-sm rounded-full data-[state=active]:bg-white data-[state=active]:shadow-sm">
                   Premium
-                  <GoVerified className="h-4 w-4 text-yellow-500" />
+                  <GoVerified className="h-4 w-4 text-amber-600 drop-shadow-[0_1px_1px_rgba(120,53,15,0.4)]" />
                 </TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
 
           {/* Swipe Deck Area */}
-          <div className="flex-1 flex items-center justify-center p-4 lg:p-6 pb-24 lg:pb-4">
+          <div className="flex-1 flex items-center justify-center overflow-x-hidden p-4 lg:p-6 pb-[calc(6.25rem+env(safe-area-inset-bottom))] lg:pb-4 lg:overflow-y-auto">
             {filteredTherapists.length > 0 ? (
               <div className="w-full h-full max-w-md lg:max-w-lg">
-                <SwipeDeck therapists={filteredTherapists} />
+                <SwipeDeck therapists={filteredTherapists} initialTherapistId={requestedTherapist} />
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center text-center space-y-4 p-8">
@@ -684,7 +702,7 @@ export default function SwipePage() {
           </div>
 
           {/* Desktop Footer Navigation - Sticky */}
-          <div className="hidden lg:block sticky bottom-0 border-t border-gray-100 bg-white/95 backdrop-blur-sm shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+          <div className="hidden lg:block sticky bottom-0 app-bottom-dock">
             <div className="flex items-center justify-center gap-2 py-3 px-6">
               {[
                 { href: "/app", icon: Home, label: "Home" },
@@ -701,8 +719,8 @@ export default function SwipePage() {
                     href={link.href}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
                       isActive 
-                        ? "bg-purple-100 text-purple-700" 
-                        : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        ? "bg-purple-100/90 text-purple-700 shadow-sm" 
+                        : "text-gray-500 hover:bg-purple-50/80 hover:text-gray-700"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -722,3 +740,5 @@ export default function SwipePage() {
     </div>
   )
 }
+
+

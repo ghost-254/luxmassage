@@ -191,7 +191,7 @@ export default function HomePage() {
                           ))}
                         </ul>
                         <p className="text-white/90 text-xs md:text-sm mt-6 italic">
-                          "What Happens in Lux Stays in Lux"
+                          "What Happens in Lux, You’ll Want Again."
                         </p>
                       </CardContent>
                     </Card>

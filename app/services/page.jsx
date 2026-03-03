@@ -14,7 +14,7 @@ export default function ServicesPage() {
         "Indulge in the ultimate sensory experience with our erotic massage sessions. Let our skilled masseuses and masseurs guide you through a journey of sensual bliss, igniting your senses and awakening every inch of your body. Explore the depths of pleasure in a safe and comfortable environment tailored to your desires.",
       benefits: ["Heightens sensory awareness", "Promotes intimacy", "Reduces stress", "Awakens pleasure"],
       duration: "60-90 minutes",
-      priceRange: "Ksh 4,000 - 6,500",
+      priceRange: "$40 - 65",
     },
     {
       image: "/services/back-massage.png",
@@ -23,7 +23,7 @@ export default function ServicesPage() {
         "The most common type of massage therapy, Swedish massage uses long, flowing strokes to promote relaxation and improve circulation. Perfect for first-timers and those seeking gentle, soothing treatment.",
       benefits: ["Reduces stress", "Improves circulation", "Promotes relaxation", "Eases muscle tension"],
       duration: "60-90 minutes",
-      priceRange: "Ksh 2,000 - 3,500",
+      priceRange: "$20 - 35",
     },
     {
       image: "/services/deep-tissue.png",
@@ -32,7 +32,7 @@ export default function ServicesPage() {
         "Using firm pressure and slow strokes, deep tissue massage targets the deeper layers of muscle and connective tissue. Ideal for chronic pain, muscle injuries, and areas of tension.",
       benefits: ["Relieves chronic pain", "Breaks up scar tissue", "Improves mobility", "Reduces inflammation"],
       duration: "60-90 minutes",
-      priceRange: "Ksh 2,500 - 4,000",
+      priceRange: "$25 - 40",
     },
     {
       image: "/services/aromatherapy.jpg",
@@ -41,7 +41,7 @@ export default function ServicesPage() {
         "Combines gentle massage techniques with essential oils chosen for their therapeutic properties. The oils are absorbed through the skin and inhaled, providing both physical and emotional benefits.",
       benefits: ["Reduces anxiety", "Improves mood", "Enhances relaxation", "Boosts immunity"],
       duration: "60-90 minutes",
-      priceRange: "Ksh 2,800 - 4,500",
+      priceRange: "$28 - 45",
     },
     {
       image: "/services/sports-massage.png",
@@ -50,7 +50,7 @@ export default function ServicesPage() {
         "Designed for athletes and active individuals, sports massage focuses on preventing and treating injuries, improving flexibility, and enhancing athletic performance.",
       benefits: ["Prevents injuries", "Improves flexibility", "Reduces recovery time", "Enhances performance"],
       duration: "45-75 minutes",
-      priceRange: "Ksh 2,200 - 3,800",
+      priceRange: "$22 - 38",
     },
     {
       image: "/services/hot-stone.png",
@@ -59,7 +59,7 @@ export default function ServicesPage() {
         "Smooth, heated stones are placed on specific points of the body and used as massage tools. The heat helps relax muscles, allowing the therapist to work deeper without excessive pressure.",
       benefits: ["Deep muscle relaxation", "Improves blood flow", "Reduces stress", "Eases pain"],
       duration: "75-90 minutes",
-      priceRange: "Ksh 3,500 - 5,500",
+      priceRange: "$35 - 55",
     },
     {
       image: "/services/reflexology.jpg",
@@ -68,7 +68,7 @@ export default function ServicesPage() {
         "Based on the principle that specific points on the feet, hands, and ears correspond to different organs and systems. Applying pressure to these points promotes healing throughout the body.",
       benefits: ["Improves circulation", "Reduces stress", "Promotes healing", "Boosts energy"],
       duration: "45-60 minutes",
-      priceRange: "Ksh 1,800 - 3,000",
+      priceRange: "$18 - 30",
     },
     {
       image: "/services/thai-massage.png",
@@ -77,7 +77,7 @@ export default function ServicesPage() {
         "An ancient healing practice that combines acupressure, yoga-like stretching, and deep compression. Performed on a mat on the floor while fully clothed, it improves flexibility and energy flow.",
       benefits: ["Increases flexibility", "Improves energy", "Reduces tension", "Enhances mobility"],
       duration: "90-120 minutes",
-      priceRange: "Ksh 3,000 - 5,000",
+      priceRange: "$30 - 50",
     },
     {
       image: "/services/prenatal-massage.png",
@@ -86,7 +86,7 @@ export default function ServicesPage() {
         "Specially designed for expectant mothers, prenatal massage addresses the unique needs of pregnancy, reducing discomfort and promoting relaxation during this special time.",
       benefits: ["Reduces pregnancy discomfort", "Improves sleep", "Decreases swelling", "Relieves stress"],
       duration: "60 minutes",
-      priceRange: "Ksh 2,800 - 4,200",
+      priceRange: "$28 - 42",
     },
     {
       image: "/services/facial-massage.jpg",
@@ -95,17 +95,17 @@ export default function ServicesPage() {
         "We offer facial massage, which has proven to be a rejuvenating practice that involves manipulating the soft tissues of the face and neck using various techniques and pressures. It offers numerous benefits for your skin, muscles, and overall well-being.",
       benefits: ["Improves skin tone", "Reduces tension", "Promotes circulation", "Anti-aging effects"],
       duration: "30-45 minutes",
-      priceRange: "Ksh 1,500 - 2,800",
+      priceRange: "$15 - 28",
     },
     {
       image: "/services/nuru-massage.jpg",
       title: "Nuru Massage",
       description:
-        "Originating from Japan, nuru massage involves the use of a special gel made from seaweed to provide a slippery and sensual experience. It typically involves body-to-body contact for an intimate and arousing experience.",
+        "Nuru massage involves the use of a special gel made from seaweed to provide a slippery and sensual experience. It typically involves body-to-body contact for an intimate and arousing experience.",
       benefits: ["Unique sensory experience", "Deep relaxation", "Skin nourishment", "Intimate connection"],
       duration: "60-90 minutes",
-      priceRange: "Ksh 5,000 - 8,000",
-    },
+      priceRange: "$50 - 80",
+    }
   ]
 
   return (
@@ -196,3 +196,4 @@ export default function ServicesPage() {
     </div>
   )
 }
+

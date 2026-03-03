@@ -1,153 +1,174 @@
-import React from "react";
+import React from "react"
+
+const sections = [
+  {
+    title: "1. Acceptance of Terms",
+    content: [
+      "By creating an account, accessing the platform, or booking a service through Lux, you agree to these Terms of Service and our Privacy Policy.",
+      "If you use Lux on behalf of a company, spa, or other entity, you confirm you are authorized to bind that entity to these Terms.",
+    ],
+  },
+  {
+    title: "2. Platform Scope",
+    content: [
+      "Lux is a booking and discovery marketplace that connects clients with independent service providers and participating businesses.",
+      "Lux does not directly employ providers unless explicitly stated in a separate written agreement. Providers remain responsible for their own professional conduct, licenses, certifications, taxes, and legal compliance.",
+    ],
+  },
+  {
+    title: "3. Eligibility and Account Responsibility",
+    content: [
+      "You must be at least 18 years old to use Lux.",
+      "You agree to provide accurate registration details and keep your profile data updated.",
+      "You are responsible for all activity under your account and for maintaining confidentiality of your login credentials.",
+    ],
+  },
+  {
+    title: "4. Verification and Safety Controls",
+    content: [
+      "Lux may request identity verification, business verification, certification records, or additional safety information before allowing bookings or payouts.",
+      "Lux may suspend, limit, or remove accounts that fail verification checks, trigger fraud indicators, or violate safety requirements.",
+    ],
+  },
+  {
+    title: "5. Booking, Pricing, and Payment",
+    content: [
+      "Displayed pricing, durations, and service details are set by providers or businesses, unless otherwise noted.",
+      "Booking fees, platform fees, taxes, and currency conversion costs (if applicable) may be shown at checkout.",
+      "You authorize Lux and its payment partners to charge your selected payment method for confirmed bookings and applicable charges.",
+    ],
+  },
+  {
+    title: "6. Cancellations, No-Shows, and Refunds",
+    content: [
+      "Cancellation windows and penalties may vary by provider, service category, and booking type.",
+      "Where no custom policy is shown, Lux default policy applies: free cancellation up to 24 hours before appointment start; late cancellations and no-shows may be charged up to the full booking amount.",
+      "Refund decisions are made based on booking records, provider response, and policy terms in effect at the time of booking.",
+    ],
+  },
+  {
+    title: "7. Conduct Standards",
+    content: [
+      "Harassment, coercion, threats, hate speech, violence, or discriminatory behavior is prohibited.",
+      "Non-consensual behavior, illegal requests, or attempts to pressure providers or clients into unsafe conditions will result in immediate enforcement actions, including account termination and potential reporting to authorities.",
+      "Providers may refuse or end a session if they reasonably believe safety, consent, or legal compliance is compromised.",
+    ],
+  },
+  {
+    title: "8. Prohibited Platform Misuse",
+    content: [
+      "You may not scrape, reverse engineer, automate abusive traffic, bypass access controls, or interfere with platform operations.",
+      "You may not impersonate another person, manipulate ratings, submit fraudulent claims, or evade payment obligations.",
+      "You may not use Lux to facilitate unlawful services or activity in any jurisdiction.",
+    ],
+  },
+  {
+    title: "9. Communications and Notifications",
+    content: [
+      "You consent to receive transactional notifications related to bookings, account security, payouts, and policy updates by email, in-app messages, SMS, or supported messaging channels.",
+      "Marketing messages are optional and can be managed through account settings where available.",
+    ],
+  },
+  {
+    title: "10. Ratings, Reviews, and User Content",
+    content: [
+      "Reviews must reflect real experiences and must not include defamatory, abusive, misleading, or privacy-violating content.",
+      "By posting content on Lux, you grant Lux a non-exclusive, worldwide, royalty-free license to host, display, reproduce, and distribute that content for platform operation and promotion.",
+      "Lux may moderate, remove, or restrict content that violates these Terms or applicable law.",
+    ],
+  },
+  {
+    title: "11. Intellectual Property",
+    content: [
+      "All Lux branding, software, interface design, text, graphics, and platform assets are protected by intellectual property laws.",
+      "You may not copy, modify, distribute, or create derivative works from Lux materials without prior written permission, except as allowed by law.",
+    ],
+  },
+  {
+    title: "12. Service Availability and Changes",
+    content: [
+      "Lux may update, suspend, or discontinue platform features at any time to improve safety, reliability, performance, or compliance.",
+      "We do not guarantee uninterrupted access and are not liable for downtime caused by infrastructure failures, maintenance, or third-party outages.",
+    ],
+  },
+  {
+    title: "13. Termination and Enforcement",
+    content: [
+      "Lux may investigate suspected violations and take enforcement actions including warnings, feature restrictions, booking holds, payout holds, suspension, or termination.",
+      "You may stop using Lux at any time. Outstanding fees, chargebacks, and unresolved disputes remain payable after termination.",
+    ],
+  },
+  {
+    title: "14. Disclaimers and Limitation of Liability",
+    content: [
+      "Lux provides the platform on an 'as is' and 'as available' basis to the extent permitted by law.",
+      "To the maximum extent permitted by applicable law, Lux is not liable for indirect, incidental, special, consequential, or punitive damages, or loss of profits, revenue, data, or goodwill arising from use of the platform.",
+      "Nothing in these Terms excludes liability that cannot legally be excluded.",
+    ],
+  },
+  {
+    title: "15. Indemnification",
+    content: [
+      "You agree to defend, indemnify, and hold harmless Lux and its affiliates from claims, losses, liabilities, and expenses arising out of your misuse of the platform, your content, or your violation of these Terms or applicable law.",
+    ],
+  },
+  {
+    title: "16. Governing Law and Dispute Resolution",
+    content: [
+      "These Terms are governed by the applicable laws of the jurisdiction where services are delivered, without regard to conflict-of-law principles.",
+      "Before formal proceedings, parties agree to attempt good-faith informal resolution by contacting support.",
+      "If a dispute cannot be resolved informally, it will be handled by the competent courts or dispute mechanisms required by applicable law.",
+    ],
+  },
+  {
+    title: "17. Changes to These Terms",
+    content: [
+      "Lux may update these Terms from time to time. Material changes will be posted on this page with a revised Effective Date.",
+      "Your continued use of Lux after changes become effective constitutes acceptance of the updated Terms.",
+    ],
+  },
+]
 
 const GeneralTerms = () => {
   return (
-    <section id="general-terms" className="py-20 bg-gray-10">
-      <div className="max-container padding-container">
-        <h2 className="text-center bold-40 mb-10">General Terms and Conditions</h2>
-        <p className="regular-16 text-gray-30 mb-4">
-          Welcome to Lux, your premier destination for online massage booking services! These General Terms and Conditions ("Terms") govern your use of our esteemed platform, designed to facilitate seamless massage appointments at your convenience. Lux proudly operates under the business name 'Lux Vita Spa' and can be found online at www.luxxtouch.com. Our mission is to provide unparalleled relaxation experiences, setting the standard for luxury and comfort. Throughout these Terms, Lux or Luxx Touch or Lux Vita Spa ("we," "us," or "our") remains committed to ensuring your satisfaction and safety. Your engagement with our Service indicates your acceptance and adherence to these Terms. If you find yourself in disagreement with any provision herein, we kindly ask that you refrain from utilizing our Service. Thank you for choosing Lux, where luxury meets convenience.
-        </p>
-        <div className="grid lg:grid-cols-1 gap-y-8 lg:gap-x-16 items-center">
-          <div>
-            <h3 className="bold-32 mb-4">1. Service Description</h3>
-            <p className="regular-16 text-gray-30">
-              Lux offers a sophisticated platform facilitating seamless booking experiences for individuals seeking expert massage services from qualified, independent masseuses. Our users can conveniently schedule in-home massage appointments exclusively through our official mobile application. To ensure the utmost security and reliability, we require users to download the application directly from our official website page or through the provided links on reputable platforms such as the Google Play Store. We strongly advise against downloading applications from unofficial sources, as they may pose risks to both users and others. Please be informed that Lux Vita holds no liability for any potential harm arising from such unauthorized downloads. Therefore, we emphasize the importance of accessing our application solely through authorized channels to guarantee a safe and enjoyable experience for all users.
-            </p>
-          </div>
-          <div>
-            <h3 className="bold-32 mb-4">2. Appointment Booking and Verification</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. By booking an appointment through our Service, you agree to provide accurate and complete information about yourself, including submitting a picture of your National ID or Passport (‘For Foreigners’) or Alien ID or Military ID, when needed.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. We collect this information to ensure the safety and security of our masseuses and clients.
-            </p>
+    <section id="general-terms" className="py-16 md:py-20 bg-background">
+      <div className="mobile-container px-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-center mb-4">Terms of Service</h1>
+          <p className="text-center text-muted-foreground mb-2">Effective Date: March 2, 2026</p>
+          <p className="text-center text-sm text-muted-foreground mb-12">
+            These Terms govern your use of the Lux website, applications, and related services.
+          </p>
+
+          <div className="space-y-8">
+            {sections.map((section) => (
+              <div key={section.title} className="rounded-2xl border border-border/60 bg-card p-6 md:p-8">
+                <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-4">{section.title}</h2>
+                <div className="space-y-3">
+                  {section.content.map((line) => (
+                    <p key={line} className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div>
-            <h3 className="bold-32 mb-4">3. Masseuse/Masseur Safety Measures</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. All masseuses/Masseurs are required to confirm their arrival at the intended location before starting the massage appointment by scanning the QR code of the client.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. If we have received no confirmation of arrival, we may initiate immediate contact with the police or we may contact both the client and the masseuse/masseur directly to gather information about the appointment delay.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              c. If a masseuse/masseur feels that the location they have arrived at is unsafe, they have the right to cancel the booking and report the incident to Lux’s support team or any other official communication channels that Lux has provided.
+          <div className="mt-10 rounded-2xl border border-border/60 bg-card p-6 md:p-8">
+            <h2 className="font-serif text-2xl md:text-3xl font-semibold mb-4">18. Contact</h2>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+              For legal questions about these Terms, contact{" "}
+              <a href="mailto:support@luxmassage.vip" className="text-primary hover:underline">
+                support@luxmassage.vip
+              </a>
+              .
             </p>
           </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">4. Payments</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. Payment for appointments is due at the time of booking and must be made through our designated payment processor.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. All payments are non-refundable unless otherwise stated in our refund policy
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">5. Cancellations and Rescheduling</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. Users have the right to cancel or reschedule their appointment up to 24 hours before the scheduled appointment time without incurring any additional charges.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. Late cancellations or no-shows will not be refunded, and may result in a cancellation fee, which will be charged to the payment method used to book the appointment.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">6. Masseuse/Masseur Conduct</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. Masseuses/Masseurs are independent contractors, and we require them to meet certain qualifications and adhere to our code of conduct.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. Any form of inappropriate behaviour from masseuses/masseurs should be reported to Lux immediately.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">7. Liability</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. While we strive to provide a safe and enjoyable experience for our users and masseuses/masseur, we are not liable for any injuries, damages, or losses that may occur during or as a result of your use of the Service.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. We recommend that you consult with a healthcare professional before booking a massage appointment, especially if you have any underlying health conditions.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">8. Intellectual Property</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              a. All content and materials available through the Service, including but not limited to text, graphics, logos, and images, are the property of Lux or its licensors and are protected by copyright and other intellectual property laws.
-            </p>
-            <p className="regular-16 text-gray-30 mb-2">
-              b. You may not reproduce, modify, distribute, or otherwise use any content from the Service without our prior written consent.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">9. Privacy Policy Compliance</h3>
-            <p className="regular-16 text-gray-30 mb-2">
-              Users agree to comply with Lux's Privacy Policy, available on our website, governing the collection, use, and disclosure of personal information provided to us.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">10. User Conduct</h3>
-            <p className="regular-16 text-gray-30">
-              Users agree to use the Service responsibly and not to engage in any unlawful, abusive, or fraudulent activities. This includes refraining from harassing, threatening, or otherwise harming other users or our masseuses/masseurs.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">11. Feedback and Reviews</h3>
-            <p className="regular-16 text-gray-30">
-              Users may have the opportunity to provide feedback and reviews about their massage experience. By submitting feedback or reviews, users grant Lux the right to use, reproduce, modify, and distribute such feedback or reviews for promotional and other business purposes.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">12. Indemnification</h3>
-            <p className="regular-16 text-gray-30">
-              Users agree to indemnify and hold Lux harmless from any claims, damages, losses, or liabilities arising out of their use of the Service, including but not limited to any breach of these Terms or violation of any law or third-party rights.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">13. Severability</h3>
-            <p className="regular-16 text-gray-30">
-              If any provision of these Terms is found to be invalid or unenforceable, the remaining provisions shall remain in full force and effect.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">14. Changes to Terms</h3>
-            <p className="regular-16 text-gray-30">
-             We reserve the right to update or modify these Terms at any time without prior notice. By continuing to use the Service after such changes, you agree to be bound by the revised Terms.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">15. Governing Law</h3>
-            <p className="regular-16 text-gray-30">
-              These Terms shall be governed by and construed in accordance with the laws of the Republic of Kenya, enshrined under the 2010 Constitution, without regard to its conflict of law provisions.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="bold-32 mb-4">16. Contact Us</h3>
-            <p className="regular-16 text-gray-30">
-              If you have any questions or concerns about these Terms, please contact us at <a href='mailto:info@luxxtouch.com' className="text-blue-500 hover:underline-offset-1 hover:underline" >info@luxxtouch.com</a>.
-            </p>
-          </div>
-
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default GeneralTerms;
+export default GeneralTerms

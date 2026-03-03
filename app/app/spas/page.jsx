@@ -35,58 +35,58 @@ export default function SpasPage() {
     { id: "spa", label: "Spas" },
     { id: "sauna", label: "Saunas" },
     { id: "wellness", label: "Wellness" },
-    { id: "massage", label: "Massage" },
   ]
 
   const countries = [
-    { id: "all", label: "All Countries" },
-    { id: "kenya", label: "Kenya" },
-    { id: "tanzania", label: "Tanzania" },
-    { id: "uganda", label: "Uganda" },
-    { id: "rwanda", label: "Rwanda" },
+    { id: "all", label: "All Regions" },
+    { id: "urban-hubs", label: "Urban Hubs" },
+    { id: "coastal-escapes", label: "Coastal Escapes" },
+    { id: "island-retreats", label: "Island Retreats" },
+    { id: "mountain-hideaways", label: "Mountain Hideaways" },
   ]
 
   const cities = {
     all: [{ id: "all", label: "All Cities" }],
-    kenya: [
+    "urban-hubs": [
       { id: "all", label: "All Cities" },
-      { id: "nairobi", label: "Nairobi" },
-      { id: "mombasa", label: "Mombasa" },
-      { id: "kisumu", label: "Kisumu" },
-      { id: "nakuru", label: "Nakuru" },
+      { id: "new-york", label: "New York" },
+      { id: "london", label: "London" },
+      { id: "dubai", label: "Dubai" },
+      { id: "singapore", label: "Singapore" },
     ],
-    tanzania: [
+    "coastal-escapes": [
       { id: "all", label: "All Cities" },
-      { id: "dar-es-salaam", label: "Dar es Salaam" },
-      { id: "arusha", label: "Arusha" },
-      { id: "zanzibar", label: "Zanzibar" },
+      { id: "miami", label: "Miami" },
+      { id: "cape-town", label: "Cape Town" },
+      { id: "sydney", label: "Sydney" },
     ],
-    uganda: [
+    "island-retreats": [
       { id: "all", label: "All Cities" },
-      { id: "kampala", label: "Kampala" },
-      { id: "entebbe", label: "Entebbe" },
-      { id: "jinja", label: "Jinja" },
+      { id: "bali", label: "Bali" },
+      { id: "phuket", label: "Phuket" },
+      { id: "maldives", label: "Maldives" },
     ],
-    rwanda: [
+    "mountain-hideaways": [
       { id: "all", label: "All Cities" },
-      { id: "kigali", label: "Kigali" },
-      { id: "musanze", label: "Musanze" },
+      { id: "aspen", label: "Aspen" },
+      { id: "zermatt", label: "Zermatt" },
+      { id: "queenstown", label: "Queenstown" },
     ],
   }
 
   const spas = [
     {
       id: 1,
-      name: "Serena Spa & Wellness",
+      name: "Serena Spa & Lounge",
       category: "spa",
       rating: 4.9,
       reviews: 324,
       distance: 1.2,
-      address: "Westlands, Nairobi",
-      city: "nairobi",
-      country: "kenya",
+      address: "Midtown, New York",
+      city: "new-york",
+      country: "urban-hubs",
       hours: "8:00 AM - 10:00 PM",
-      phone: "+254 700 123 456",
+      phone: "+1 212 555 0147",
       image: "/massage-background.jpg",
       premium: true,
       services: ["Massage", "Sauna", "Facial"],
@@ -95,16 +95,16 @@ export default function SpasPage() {
     },
     {
       id: 2,
-      name: "The Retreat Nairobi",
+      name: "The Retreat London",
       category: "wellness",
       rating: 4.8,
       reviews: 256,
       distance: 2.5,
-      address: "Karen, Nairobi",
-      city: "nairobi",
-      country: "kenya",
+      address: "Mayfair, London",
+      city: "london",
+      country: "urban-hubs",
       hours: "9:00 AM - 9:00 PM",
-      phone: "+254 700 789 012",
+      phone: "+44 20 7946 0123",
       image: "/massage-background.jpg",
       premium: false,
       services: ["Yoga", "Meditation", "Massage"],
@@ -118,11 +118,11 @@ export default function SpasPage() {
       rating: 4.7,
       reviews: 189,
       distance: 3.1,
-      address: "Kilimani, Nairobi",
-      city: "nairobi",
-      country: "kenya",
+      address: "Marina Bay, Singapore",
+      city: "singapore",
+      country: "urban-hubs",
       hours: "6:00 AM - 11:00 PM",
-      phone: "+254 700 345 678",
+      phone: "+65 3123 4567",
       image: "/massage-background.jpg",
       premium: true,
       services: ["Steam Room", "Hot Stone", "Cold Plunge"],
@@ -136,11 +136,11 @@ export default function SpasPage() {
       rating: 4.6,
       reviews: 142,
       distance: 0.8,
-      address: "Lavington, Nairobi",
-      city: "nairobi",
-      country: "kenya",
+      address: "Jumeirah, Dubai",
+      city: "dubai",
+      country: "urban-hubs",
       hours: "10:00 AM - 8:00 PM",
-      phone: "+254 700 567 890",
+      phone: "+971 4 123 4567",
       image: "/massage-background.jpg",
       premium: false,
       services: ["Deep Tissue", "Swedish", "Thai"],
@@ -149,16 +149,16 @@ export default function SpasPage() {
     },
     {
       id: 5,
-      name: "Mombasa Beach Spa",
+      name: "Oceanfront Escape Spa",
       category: "spa",
       rating: 4.5,
       reviews: 210,
       distance: 5.2,
-      address: "Nyali, Mombasa",
-      city: "mombasa",
-      country: "kenya",
+      address: "South Beach, Miami",
+      city: "miami",
+      country: "coastal-escapes",
       hours: "7:00 AM - 9:00 PM",
-      phone: "+254 700 111 222",
+      phone: "+1 305 555 0188",
       image: "/massage-background.jpg",
       premium: true,
       services: ["Beach Massage", "Aromatherapy", "Body Scrub"],
@@ -167,16 +167,16 @@ export default function SpasPage() {
     },
     {
       id: 6,
-      name: "Zanzibar Wellness Resort",
+      name: "Bali Wellness Resort",
       category: "wellness",
       rating: 4.9,
       reviews: 456,
       distance: 8.0,
-      address: "Stone Town, Zanzibar",
-      city: "zanzibar",
-      country: "tanzania",
+      address: "Seminyak, Bali",
+      city: "bali",
+      country: "island-retreats",
       hours: "6:00 AM - 10:00 PM",
-      phone: "+255 700 333 444",
+      phone: "+62 361 555 0199",
       image: "/massage-background.jpg",
       premium: true,
       services: ["Spa", "Yoga", "Detox"],
@@ -185,16 +185,16 @@ export default function SpasPage() {
     },
     {
       id: 7,
-      name: "Kampala Serenity Spa",
+      name: "Cape Serenity Spa",
       category: "spa",
       rating: 4.4,
       reviews: 178,
       distance: 2.3,
-      address: "Kololo, Kampala",
-      city: "kampala",
-      country: "uganda",
+      address: "Clifton, Cape Town",
+      city: "cape-town",
+      country: "coastal-escapes",
       hours: "8:00 AM - 8:00 PM",
-      phone: "+256 700 555 666",
+      phone: "+27 21 555 0101",
       image: "/massage-background.jpg",
       premium: false,
       services: ["Massage", "Facial", "Manicure"],
@@ -203,16 +203,16 @@ export default function SpasPage() {
     },
     {
       id: 8,
-      name: "Kigali Luxury Wellness",
+      name: "Alpine Luxury Wellness",
       category: "wellness",
       rating: 4.7,
       reviews: 134,
       distance: 1.5,
-      address: "Kimihurura, Kigali",
-      city: "kigali",
-      country: "rwanda",
+      address: "Bahnhofstrasse, Zermatt",
+      city: "zermatt",
+      country: "mountain-hideaways",
       hours: "7:00 AM - 9:00 PM",
-      phone: "+250 700 777 888",
+      phone: "+41 27 555 0102",
       image: "/massage-background.jpg",
       premium: true,
       services: ["Hot Stone", "Reflexology", "Couples Massage"],
@@ -225,7 +225,11 @@ export default function SpasPage() {
     let result = spas.filter(spa => {
       const matchesSearch = spa.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             spa.address.toLowerCase().includes(searchQuery.toLowerCase())
-      const matchesCategory = selectedCategory === "all" || spa.category === selectedCategory
+      const matchesCategory =
+        selectedCategory === "all" ||
+        (selectedCategory === "spa"
+          ? spa.category === "spa" || spa.category === "massage"
+          : spa.category === selectedCategory)
       const matchesCountry = selectedCountry === "all" || spa.country === selectedCountry
       const matchesCity = selectedCity === "all" || spa.city === selectedCity
       const matchesRating = spa.rating >= minRating[0]
@@ -252,7 +256,7 @@ export default function SpasPage() {
   // Generate map URL based on filtered spas
   const mapUrl = useMemo(() => {
     if (filteredSpas.length === 0) {
-      return "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8193!2d36.8!3d-1.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMTUnMzYuMCJTIDM2wrA0OCcwMC4wIkU!5e0!3m2!1sen!2ske!4v1234567890"
+      return "https://www.google.com/maps/embed/v1/view?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&center=20,0&zoom=2"
     }
     
     // Center map on first filtered spa
@@ -285,9 +289,9 @@ export default function SpasPage() {
 
   const FilterContent = () => (
     <div className="space-y-6">
-            {/* Country Filter */}
+            {/* Region Filter */}
             <div className="space-y-3">
-              <label className="text-sm font-medium text-gray-700">Country</label>
+              <label className="text-sm font-medium text-gray-700">Region</label>
               <Popover open={openCountry} onOpenChange={setOpenCountry}>
                 <PopoverTrigger asChild>
                   <Button
@@ -298,15 +302,15 @@ export default function SpasPage() {
                   >
                     {selectedCountry && selectedCountry !== "all"
                       ? countries.find((c) => c.id === selectedCountry)?.label
-                      : "All Countries"}
+                      : "All Regions"}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-full p-0" align="start">
                   <Command>
-                    <CommandInput placeholder="Search country..." />
+                    <CommandInput placeholder="Search region..." />
                     <CommandList className="max-h-[200px]">
-                      <CommandEmpty>No country found.</CommandEmpty>
+                      <CommandEmpty>No region found.</CommandEmpty>
                       <CommandGroup>
                         <CommandItem
                           value="all"
@@ -322,7 +326,7 @@ export default function SpasPage() {
                               selectedCountry === "all" ? "opacity-100" : "opacity-0"
                             )}
                           />
-                          All Countries
+                          All Regions
                         </CommandItem>
                         {countries.map((country) => (
                           <CommandItem
@@ -464,9 +468,9 @@ export default function SpasPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-50 lg:bg-white">
+    <div className="min-h-dvh app-shell overflow-x-hidden">
       {/* Mobile Header */}
-      <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-gray-100">
+      <div className="lg:hidden sticky top-0 z-40 app-mobile-header">
         <div className="flex items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Lux" width={32} height={32} className="h-8 w-8" />
@@ -528,9 +532,9 @@ export default function SpasPage() {
       </div>
 
       {/* Main Layout */}
-      <div className="flex min-h-[calc(100vh-140px)] lg:min-h-screen">
+      <div className="flex min-h-[calc(100dvh-140px)] lg:min-h-dvh">
         {/* Left Side Panel - Desktop Only */}
-        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col border-r border-gray-100 bg-white h-screen sticky top-0">
+        <aside className="hidden lg:flex lg:w-80 xl:w-96 flex-col border-r border-gray-100 bg-white h-screen sticky top-0 app-desktop-sidebar">
           {/* Panel Header */}
           <div className="p-6 border-b border-gray-100">
             <div className="flex items-center justify-between mb-6">
@@ -593,7 +597,7 @@ export default function SpasPage() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-medium text-gray-500">Filters</h3>
                 {activeFiltersCount > 0 && (
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-700">
+                  <Badge variant="secondary" className="bg-purple-100/90 text-purple-700 shadow-sm">
                     {activeFiltersCount} active
                   </Badge>
                 )}
@@ -624,7 +628,7 @@ export default function SpasPage() {
           </div>
 
           {/* Panel Footer */}
-          <div className="p-4 border-t border-gray-100 bg-gray-50 space-y-3">
+          <div className="p-4 border-t border-gray-100 bg-gray-50 space-y-3 app-sidebar-footer">
             <div className="flex items-center gap-3 px-2">
               <div className="h-9 w-9 rounded-full bg-purple-100 flex items-center justify-center">
                 <User className="h-5 w-5 text-purple-600" />
@@ -645,9 +649,9 @@ export default function SpasPage() {
         </aside>
 
         {/* Right Side - Spa Listings */}
-        <main className="flex-1 flex flex-col bg-gray-50 lg:bg-gradient-to-br lg:from-purple-50 lg:via-white lg:to-pink-50">
+        <main className="flex-1 flex flex-col app-main-panel">
           {/* Desktop Header */}
-          <div className="hidden lg:flex items-center justify-between py-4 px-8 bg-white/80 backdrop-blur-sm border-b border-gray-100">
+          <div className="hidden lg:flex items-center justify-between py-4 px-8 app-topbar">
             <h2 className="font-serif text-xl font-semibold text-gray-900">
               {filteredSpas.length} Spa{filteredSpas.length !== 1 ? 's' : ''} Found
             </h2>
@@ -667,11 +671,11 @@ export default function SpasPage() {
           </div>
 
           {/* Spa Listings */}
-          <div className="flex-1 overflow-y-auto p-4 lg:p-8 pb-24 lg:pb-4">
+          <div className="flex-1 overflow-x-hidden p-4 lg:overflow-y-auto lg:p-8 pb-[calc(6.25rem+env(safe-area-inset-bottom))] lg:pb-4">
             {filteredSpas.length > 0 ? (
               <div className="grid gap-4 lg:grid-cols-2">
                 {filteredSpas.map((spa) => (
-                  <Card key={spa.id} className="border-none shadow-sm hover:shadow-md transition-shadow cursor-pointer bg-white overflow-hidden">
+                  <Card key={spa.id} className="app-surface-card border-none hover:shadow-md transition-shadow cursor-pointer overflow-hidden">
                     <div className="relative h-40 w-full">
                       <Image src={spa.image || "/placeholder.svg"} alt={spa.name} fill className="object-cover" />
                       {spa.premium && (
@@ -749,7 +753,7 @@ export default function SpasPage() {
           </div>
 
           {/* Desktop Footer Navigation - Sticky */}
-          <div className="hidden lg:block sticky bottom-0 border-t border-gray-100 bg-white/95 backdrop-blur-sm shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+          <div className="hidden lg:block sticky bottom-0 app-bottom-dock">
             <div className="flex items-center justify-center gap-2 py-3 px-6">
               {[
                 { href: "/app", icon: Home, label: "Home" },
@@ -766,8 +770,8 @@ export default function SpasPage() {
                     href={link.href}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
                       isActive 
-                        ? "bg-purple-100 text-purple-700" 
-                        : "text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                        ? "bg-purple-100/90 text-purple-700 shadow-sm" 
+                        : "text-gray-500 hover:bg-purple-50/80 hover:text-gray-700"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -787,3 +791,5 @@ export default function SpasPage() {
     </div>
   )
 }
+
+

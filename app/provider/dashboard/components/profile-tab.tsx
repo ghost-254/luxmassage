@@ -345,7 +345,7 @@ export function ProfileTab({ provider }: ProfileTabProps) {
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm font-medium mb-2">Price (Ksh)</label>
+                  <label className="block text-sm font-medium mb-2">Price (USD)</label>
                   <input
                     type="number"
                     value={pkg.price}
@@ -498,7 +498,7 @@ export function ProfileTab({ provider }: ProfileTabProps) {
                 <div className="mb-4">
                   <h3 className="text-xl font-bold mb-2">{pkg.name}</h3>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-3xl font-bold gradient-text">Ksh {pkg.price}</span>
+                    <span className="text-3xl font-bold gradient-text">${pkg.price}</span>
                     <span className="text-sm text-muted-foreground">/session</span>
                   </div>
                 </div>
@@ -594,3 +594,4 @@ export function ProfileTab({ provider }: ProfileTabProps) {
     </div>
   )
 }
+

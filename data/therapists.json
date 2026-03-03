@@ -1,19 +1,19 @@
 [
   {
     "id": "t1",
-    "username": "amina_wellness",
-    "name": "Amina Wanjiku",
-    "photo": "/therapists/amina.jpg",
-    "photos": ["/therapists/amina.jpg"],
+    "username": "amina_angel",
+    "name": "Amina Angel",
+    "photo": "/therapists/amina.png",
+    "photos": ["/therapists/amina.png"],
     "rating": 4.8,
     "reviews": 127,
     "followers": 1243,
-    "price": "Ksh 2,500",
+    "price": "$75",
     "pricePerHour": 2500,
     "distance": "2.4 km",
     "location": {
-      "country": "Kenya",
-      "city": "Nairobi"
+      "country": "Global",
+      "city": "New York"
     },
     "bio": "Certified massage therapist with 8+ years of experience specializing in Swedish and aromatherapy sessions. I believe in holistic healing and creating a peaceful environment for every client.",
     "specialties": ["Swedish", "Aromatherapy", "Hot Stone"],
@@ -33,12 +33,12 @@
     "rating": 4.6,
     "reviews": 89,
     "followers": 876,
-    "price": "Ksh 2,000",
+    "price": "$60",
     "pricePerHour": 2000,
     "distance": "3.1 km",
     "location": {
-      "country": "Kenya",
-      "city": "Mombasa"
+      "country": "Global",
+      "city": "London"
     },
     "bio": "Skilled in deep tissue and sports massages. Former athlete who understands the body's needs for recovery and relaxation.",
     "specialties": ["Deep Tissue", "Sports", "Trigger Point"],
@@ -58,12 +58,12 @@
     "rating": 4.9,
     "reviews": 203,
     "followers": 3421,
-    "price": "Ksh 3,000",
+    "price": "$90",
     "pricePerHour": 3000,
     "distance": "1.8 km",
     "location": {
-      "country": "Kenya",
-      "city": "Nairobi"
+      "country": "Global",
+      "city": "Dubai"
     },
     "bio": "Luxury spa specialist offering premium treatments including hot stone therapy and full body relaxation packages.",
     "specialties": ["Hot Stone", "Full Body", "Couples Massage"],
@@ -83,12 +83,12 @@
     "rating": 4.7,
     "reviews": 156,
     "followers": 1567,
-    "price": "Ksh 2,200",
+    "price": "$65",
     "pricePerHour": 2200,
     "distance": "4.2 km",
     "location": {
-      "country": "Kenya",
-      "city": "Kisumu"
+      "country": "Global",
+      "city": "Singapore"
     },
     "bio": "Therapeutic massage expert focusing on pain relief and injury recovery. Combining traditional techniques with modern approaches.",
     "specialties": ["Therapeutic", "Pain Relief", "Injury Recovery"],
@@ -108,12 +108,12 @@
     "rating": 4.8,
     "reviews": 178,
     "followers": 2890,
-    "price": "Ksh 2,800",
+    "price": "$85",
     "pricePerHour": 2800,
     "distance": "2.9 km",
     "location": {
-      "country": "Kenya",
-      "city": "Nairobi"
+      "country": "Global",
+      "city": "Los Angeles"
     },
     "bio": "Holistic wellness practitioner specializing in aromatherapy and relaxation techniques. Creating personalized experiences for each client.",
     "specialties": ["Aromatherapy", "Reflexology", "Prenatal", "Erotic Massage"],
@@ -133,12 +133,12 @@
     "rating": 4.9,
     "reviews": 245,
     "followers": 4532,
-    "price": "Ksh 3,500",
+    "price": "$105",
     "pricePerHour": 3500,
     "distance": "1.2 km",
     "location": {
-      "country": "Kenya",
-      "city": "Nairobi"
+      "country": "Global",
+      "city": "Miami"
     },
     "bio": "Specialized in sensual and erotic massage experiences. Creating intimate, safe, and pleasurable sessions tailored to your desires.",
     "specialties": ["Erotic Massage", "Nuru Massage", "Tantric"],
@@ -158,11 +158,11 @@
     "rating": 4.7,
     "reviews": 134,
     "followers": 1987,
-    "price": "Ksh 3,200",
+    "price": "$3,200",
     "pricePerHour": 3200,
     "distance": "2.5 km",
     "location": {
-      "country": "United States",
+      "country": "Global",
       "city": "New York"
     },
     "bio": "Expert in Nuru massage and body-to-body techniques. Providing unforgettable sensual experiences in a comfortable setting.",
@@ -175,3 +175,4 @@
     "premium": false
   }
 ]
+

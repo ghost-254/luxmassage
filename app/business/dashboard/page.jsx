@@ -36,8 +36,8 @@ export default function BusinessDashboard() {
   const business = {
     name: "Serenity Spa & Wellness",
     email: "info@serenityspa.com",
-    phone: "+254 712 345 678",
-    location: "Westlands",
+    phone: "+1 212 555 0100",
+    location: "Downtown District",
     photo: "/placeholder.svg?height=200&width=200",
     rating: 4.9,
     totalBookings: 1247,
@@ -45,7 +45,7 @@ export default function BusinessDashboard() {
   }
 
   const stats = [
-    { label: "Total Earnings", value: "Ksh 2.4M", icon: DollarSign, color: "from-pink-500 to-purple-500" },
+    { label: "Total Earnings", value: "$2.4M", icon: DollarSign, color: "from-pink-500 to-purple-500" },
     { label: "Total Bookings", value: "1,247", icon: Calendar, color: "from-purple-500 to-cyan-500" },
     { label: "Active Clients", value: "342", icon: Users, color: "from-cyan-500 to-pink-500" },
     { label: "Avg Rating", value: "4.9", icon: Star, color: "from-pink-500 to-cyan-500" },
@@ -59,7 +59,7 @@ export default function BusinessDashboard() {
       date: "Today",
       time: "2:00 PM",
       duration: "60 min",
-      price: "Ksh 2,500",
+      price: "$2,500",
       status: "confirmed",
     },
     {
@@ -69,7 +69,7 @@ export default function BusinessDashboard() {
       date: "Today",
       time: "4:30 PM",
       duration: "90 min",
-      price: "Ksh 3,500",
+      price: "$3,500",
       status: "confirmed",
     },
     {
@@ -79,7 +79,7 @@ export default function BusinessDashboard() {
       date: "Tomorrow",
       time: "10:00 AM",
       duration: "60 min",
-      price: "Ksh 3,000",
+      price: "$3,000",
       status: "pending",
     },
   ]
@@ -91,15 +91,15 @@ export default function BusinessDashboard() {
   ]
 
   const walletData = {
-    availableBalance: "Ksh 856,000",
-    pendingBalance: "Ksh 124,500",
-    totalWithdrawn: "Ksh 1.2M",
+    availableBalance: "$856,000",
+    pendingBalance: "$124,500",
+    totalWithdrawn: "$1.2M",
     transactions: [
-      { id: 1, type: "credit", amount: "Ksh 2,500", description: "Booking payment - Sarah M.", date: "Today, 2:30 PM" },
-      { id: 2, type: "credit", amount: "Ksh 3,500", description: "Booking payment - James K.", date: "Today, 5:00 PM" },
-      { id: 3, type: "debit", amount: "Ksh 50,000", description: "Withdrawal to M-Pesa", date: "Yesterday, 3:15 PM" },
-      { id: 4, type: "credit", amount: "Ksh 2,500", description: "Booking payment - Linda W.", date: "2 days ago" },
-      { id: 5, type: "credit", amount: "Ksh 4,000", description: "Booking payment - Michael T.", date: "3 days ago" },
+      { id: 1, type: "credit", amount: "$2,500", description: "Booking payment - Sarah M.", date: "Today, 2:30 PM" },
+      { id: 2, type: "credit", amount: "$3,500", description: "Booking payment - James K.", date: "Today, 5:00 PM" },
+      { id: 3, type: "debit", amount: "$50,000", description: "Withdrawal to Mobile Wallet", date: "Yesterday, 3:15 PM" },
+      { id: 4, type: "credit", amount: "$2,500", description: "Booking payment - Linda W.", date: "2 days ago" },
+      { id: 5, type: "credit", amount: "$4,000", description: "Booking payment - Michael T.", date: "3 days ago" },
     ],
   }
 
@@ -465,3 +465,4 @@ export default function BusinessDashboard() {
     </div>
   )
 }
+

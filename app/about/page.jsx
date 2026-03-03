@@ -15,7 +15,7 @@ export default function AboutPage() {
             <div className="max-w-3xl mx-auto text-center space-y-6">
               <h1 className="font-serif text-4xl md:text-5xl font-bold">About Lux</h1>
               <p className="text-lg text-muted-foreground">
-                Connecting people with wellness professionals for a healthier, more relaxed life
+                Curating irresistible massage experiences for people who crave more than ordinary
               </p>
             </div>
           </div>
@@ -27,19 +27,18 @@ export default function AboutPage() {
             <div className="max-w-3xl mx-auto space-y-6 text-muted-foreground leading-relaxed">
               <h2 className="font-serif text-3xl font-bold text-foreground">Our Story</h2>
               <p>
-                Lux was born from a simple observation: finding quality massage and spa services shouldn't be
-                complicated. Too often, people struggle to discover trusted therapists, compare services, or book
-                appointments conveniently.
+                Lux started with one belief: indulgence should be effortless. Finding the right massage experience
+                should feel exciting, not exhausting.
               </p>
               <p>
-                We created Lux to solve this problem. Our platform brings together certified massage therapists and
-                luxury spas in one easy-to-use app, making wellness accessible to everyone. Whether you're seeking
-                relief from chronic pain, stress reduction, or simply a moment of self-care, we're here to help.
+                We built a platform where certified therapists and luxury spas meet elevated taste. From slow,
+                sensual bodywork to deep, deliberate pressure, Lux helps you find the exact mood you want and book it
+                in minutes.
               </p>
               <p>
-                Today, Lux serves thousands of users across Kenya, connecting them with hundreds of verified wellness
-                professionals. We're proud to be part of your wellness journey and committed to making every experience
-                exceptional.
+                Today, Lux connects thousands of clients worldwide with verified professionals who understand
+                chemistry, atmosphere, and discretion. Every detail is designed to leave you wanting your next
+                session before this one ends.
               </p>
             </div>
           </div>
@@ -50,37 +49,37 @@ export default function AboutPage() {
           <div className="mobile-container px-4">
             <div className="text-center space-y-4 mb-12">
               <h2 className="font-serif text-3xl md:text-4xl font-bold">Our Values</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">The principles that guide everything we do</p>
+              <p className="text-muted-foreground max-w-2xl mx-auto">The standards behind every unforgettable booking</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {[
                 {
                   icon: Heart,
-                  title: "Wellness First",
+                  title: "Desire-Led Experience",
                   description:
-                    "We prioritize your health and wellbeing above all else, ensuring every service meets our high standards.",
+                    "Every session is crafted around your mood, your preferences, and the kind of touch you can't stop thinking about.",
                   color: "#e91e8c",
                 },
                 {
                   icon: Shield,
-                  title: "Trust & Safety",
+                  title: "Discreet & Safe",
                   description:
-                    "All therapists are verified, certified, and background-checked to ensure your safety and peace of mind.",
+                    "Every therapist is verified, certified, and vetted so your experience stays private, polished, and secure.",
                   color: "#6b4fe0",
                 },
                 {
                   icon: Users,
-                  title: "Community",
+                  title: "Magnetic Talent",
                   description:
-                    "We're building a community of wellness enthusiasts and professionals who support each other's growth.",
+                    "We partner with standout professionals known for presence, technique, and creating undeniable connection.",
                   color: "#00d9c0",
                 },
                 {
                   icon: Sparkles,
-                  title: "Excellence",
+                  title: "Luxury Standard",
                   description:
-                    "We're committed to providing exceptional experiences through quality service and continuous improvement.",
+                    "From first click to final exhale, we obsess over details that make each encounter feel elevated and exclusive.",
                   color: "#e91e8c",
                 },
               ].map((value, index) => (

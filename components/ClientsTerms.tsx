@@ -96,13 +96,13 @@ const ClientsTerms = () => {
           <div>
             <h3 className="bold-32 mb-4">9. Governing Law</h3>
             <p className="regular-16 text-gray-30 mb-2">
-                These Terms shall be governed by and construed in accordance with the laws of te Republic of Kenya, without regard to its conflict of law provisions.
+                These Terms shall be governed by and construed in accordance with the applicable laws of the jurisdiction where the services are provided, without regard to conflict of law provisions.
             </p>
           </div>
           <div>
             <h3 className="bold-32 mb-4">10. Contact Us</h3>
             <p className="regular-16 text-gray-30 mb-2">
-                If you have any questions or concerns about these Terms, please contact us at <a href="mailto:info@luxxtouch.com" className="text-blue-500 hover:underline">info@luxxtouch.com</a> or call us at +254707529691.
+                If you have any questions or concerns about these Terms, please contact us at <a href="mailto:info@luxxtouch.com" className="text-blue-500 hover:underline">info@luxxtouch.com</a> or call us at +10000000000.
             </p>
           </div>
         </div>

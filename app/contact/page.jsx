@@ -192,8 +192,8 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-foreground mb-1">WhatsApp</h3>
                     <p className="text-muted-foreground text-sm mb-2">Available 24/7 for support</p>
-                    <a href="tel:+254794152681" className="text-primary hover:underline font-medium">
-                      +254 7941 526 81
+                    <a href="tel:+10000000000" className="text-primary hover:underline font-medium">
+                      +1 000 000 0000
                     </a>
                   </div>
                 </div>
