@@ -9,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
+import { HistoryBackButton } from "@/components/history-back-button"
 import { 
   ArrowLeft, Home, Heart, MapPin, MessageCircle, User, LogOut, 
   Settings, Calendar, Bell, CreditCard, HelpCircle, Edit, Shield, Star, Clock, Phone, ChevronLeft, ChevronRight, Gift, CircleCheck
@@ -82,7 +83,7 @@ export default function ProfilePage() {
     }
 
     return (
-      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-purple-100 text-purple-700">
+      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-blue-100 text-blue-800">
         <Heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
       </div>
     )
@@ -102,12 +103,12 @@ export default function ProfilePage() {
         <PopoverContent
           align="end"
           sideOffset={10}
-          className="flex max-h-[70vh] w-[calc(100vw-4rem)] max-w-xs flex-col rounded-2xl border border-purple-100 bg-white/95 p-0 shadow-[0_16px_40px_rgba(15,23,42,0.18)] backdrop-blur-xl sm:max-w-sm"
+          className="flex max-h-[70vh] w-[calc(100vw-4rem)] max-w-xs flex-col rounded-2xl border border-blue-100 bg-white/95 p-0 shadow-[0_16px_40px_rgba(15,23,42,0.18)] backdrop-blur-xl sm:max-w-sm"
         >
-          <div className="flex items-center justify-between border-b border-purple-100/80 px-3 sm:px-4 py-2.5 sm:py-3">
+          <div className="flex items-center justify-between border-b border-blue-100/80 px-3 sm:px-4 py-2.5 sm:py-3">
             <h3 className="font-serif text-base sm:text-lg font-semibold text-gray-900">Notifications</h3>
             <div className="flex items-center gap-2">
-              <Badge className="border-none bg-purple-600 text-[10px] sm:text-xs text-white">
+              <Badge className="border-none bg-blue-700 text-[10px] sm:text-xs text-white">
                 {unreadNotifications} new
               </Badge>
               <Button
@@ -116,7 +117,7 @@ export default function ProfilePage() {
                 size="sm"
                 onClick={markAllNotificationsAsRead}
                 disabled={unreadNotifications === 0}
-                className="h-7 px-2 text-[10px] sm:text-xs text-purple-700 hover:bg-purple-50 disabled:opacity-50"
+                className="h-7 px-2 text-[10px] sm:text-xs text-blue-800 hover:bg-blue-50 disabled:opacity-50"
               >
                 Mark all read
               </Button>
@@ -127,7 +128,7 @@ export default function ProfilePage() {
               {notifications.map((item) => (
                 <div
                   key={item.id}
-                  className="rounded-xl border border-transparent bg-white/70 p-2 sm:p-2.5 transition-colors hover:border-purple-100 hover:bg-purple-50/40"
+                  className="rounded-xl border border-transparent bg-white/70 p-2 sm:p-2.5 transition-colors hover:border-blue-100 hover:bg-blue-50/40"
                 >
                   <div className="flex items-start gap-2">
                     <NotificationIcon kind={item.kind} />
@@ -138,11 +139,11 @@ export default function ProfilePage() {
                       </div>
                       <p className="mt-0.5 text-[11px] sm:text-xs leading-relaxed text-gray-600">{item.description}</p>
                       <div className="mt-1.5 flex items-center gap-2">
-                        {item.unread && <span className="h-1.5 w-1.5 rounded-full bg-purple-600" />}
+                        {item.unread && <span className="h-1.5 w-1.5 rounded-full bg-blue-700" />}
                         <button
                           type="button"
                           onClick={() => toggleNotificationReadState(item.id)}
-                          className="text-[10px] sm:text-xs font-medium text-purple-700 hover:text-purple-800"
+                          className="text-[10px] sm:text-xs font-medium text-blue-800 hover:text-blue-900"
                         >
                           {item.unread ? "Mark as read" : "Mark as unread"}
                         </button>
@@ -153,7 +154,7 @@ export default function ProfilePage() {
               ))}
             </div>
           </div>
-          <div className="border-t border-purple-100/80 bg-white/95 p-2.5 sm:p-3">
+          <div className="border-t border-blue-100/80 bg-white/95 p-2.5 sm:p-3">
             <Button asChild variant="outline" className="w-full bg-transparent text-xs sm:text-sm">
               <Link href="/app/profile">Open Account Updates</Link>
             </Button>
@@ -310,8 +311,8 @@ export default function ProfilePage() {
 
   const achievements = [
     { icon: Star, label: "Top Reviewer", color: "text-yellow-500", bg: "bg-yellow-50" },
-    { icon: Heart, label: "Loyal Customer", color: "text-pink-500", bg: "bg-pink-50" },
-    { icon: Calendar, label: "10+ Bookings", color: "text-purple-500", bg: "bg-purple-50" },
+    { icon: Heart, label: "Loyal Customer", color: "text-emerald-600", bg: "bg-emerald-50" },
+    { icon: Calendar, label: "10+ Bookings", color: "text-blue-600", bg: "bg-blue-50" },
   ]
 
   return (
@@ -321,7 +322,7 @@ export default function ProfilePage() {
         <div className="flex items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Lux" width={32} height={32} className="h-8 w-8" />
-            <span className="font-serif text-lg font-semibold text-purple-700">Lux</span>
+            <span className="font-serif text-lg font-semibold text-blue-800">Lux</span>
           </Link>
           <NotificationsOverlay />
         </div>
@@ -336,14 +337,11 @@ export default function ProfilePage() {
             <div className="flex items-center justify-between mb-6">
               <Link href="/" className="flex items-center gap-3">
                 <Image src="/logo.png" alt="Lux" width={40} height={40} className="h-10 w-10" />
-                <span className="font-serif text-xl font-semibold text-purple-700">Lux</span>
+                <span className="font-serif text-xl font-semibold text-blue-800">Lux</span>
               </Link>
-              <Link 
-                href="/" 
-                className="h-9 w-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-              >
+              <HistoryBackButton className="h-9 w-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                 <ArrowLeft className="h-4 w-4 text-gray-600" />
-              </Link>
+              </HistoryBackButton>
             </div>
             <div>
               <h1 className="font-serif text-2xl font-bold text-gray-900">My Profile</h1>
@@ -356,7 +354,7 @@ export default function ProfilePage() {
             {/* User Profile Card */}
             <div className="p-6 border-b border-gray-100">
               <div className="flex items-center gap-4">
-                <div className="relative h-16 w-16 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-purple-100">
+                <div className="relative h-16 w-16 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-blue-100">
                   <Image src={user.photo || "/placeholder.svg"} alt={user.name} fill className="object-cover" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -379,12 +377,12 @@ export default function ProfilePage() {
             <div className="p-6 border-b border-gray-100">
               <h3 className="text-sm font-medium text-gray-500 mb-4">Your Stats</h3>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-purple-50 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-purple-600">{user.totalBookings}</p>
+                <div className="bg-blue-50 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-blue-700">{user.totalBookings}</p>
                   <p className="text-xs text-gray-600">Total Bookings</p>
                 </div>
-                <div className="bg-pink-50 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-pink-600">{user.favoriteTherapists}</p>
+                <div className="bg-emerald-50 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-emerald-700">{user.favoriteTherapists}</p>
                   <p className="text-xs text-gray-600">Favorites</p>
                 </div>
               </div>
@@ -410,8 +408,8 @@ export default function ProfilePage() {
           {/* Panel Footer */}
           <div className="p-4 border-t border-gray-100 bg-gray-50 space-y-3 app-sidebar-footer">
             <div className="flex items-center gap-3 px-2">
-              <div className="h-9 w-9 rounded-full bg-purple-100 flex items-center justify-center">
-                <Shield className="h-5 w-5 text-purple-600" />
+              <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center">
+                <Shield className="h-5 w-5 text-blue-700" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900">Account Verified</p>
@@ -439,7 +437,7 @@ export default function ProfilePage() {
           {/* Content Area */}
           <div className="flex-1 overflow-x-hidden p-4 lg:overflow-hidden lg:p-8 pb-[calc(6.25rem+env(safe-area-inset-bottom))] lg:pb-4 space-y-6 lg:space-y-0">
             {/* Mobile User Card */}
-            <Card className="lg:hidden app-surface-card border-none">
+            <Card className="lg:hidden app-surface-card app-surface-card--blue border-none">
               <CardContent className="p-4 sm:p-6">
                 <div className="flex items-start gap-4">
                   <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-full overflow-hidden flex-shrink-0">
@@ -465,11 +463,11 @@ export default function ProfilePage() {
                 {/* Mobile Stats */}
                 <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-gray-100">
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-purple-600">{user.totalBookings}</p>
+                    <p className="text-2xl font-bold text-blue-700">{user.totalBookings}</p>
                     <p className="text-sm text-gray-500">Total Bookings</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-2xl font-bold text-pink-600">{user.favoriteTherapists}</p>
+                    <p className="text-2xl font-bold text-emerald-700">{user.favoriteTherapists}</p>
                     <p className="text-sm text-gray-500">Favorites</p>
                   </div>
                 </div>
@@ -480,12 +478,12 @@ export default function ProfilePage() {
             <div className="space-y-4 lg:h-full lg:min-h-0">
               {/* Mobile Selector */}
               <div className="lg:hidden space-y-3">
-                <div className="flex items-center justify-between rounded-xl border border-purple-100 bg-white/85 p-2">
+                <div className="flex items-center justify-between rounded-xl border border-blue-100 bg-white/85 p-2">
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-purple-700"
+                    className="h-8 w-8 text-blue-800"
                     onClick={() => shiftSection(-1)}
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -500,7 +498,7 @@ export default function ProfilePage() {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-purple-700"
+                    className="h-8 w-8 text-blue-800"
                     onClick={() => shiftSection(1)}
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -518,14 +516,14 @@ export default function ProfilePage() {
                         onClick={() => setSelectedSection(section.id)}
                         className={`w-full rounded-xl border px-2.5 py-2 transition-colors ${
                           isActive
-                            ? "border-purple-300 bg-purple-100/80 text-purple-700"
+                            ? "border-blue-300 bg-blue-100/80 text-blue-800"
                             : "border-gray-200 bg-white/80 text-gray-600"
                         }`}
                       >
                         <div className="flex items-center gap-1.5">
                           <Icon className="h-4 w-4 shrink-0" />
                           <span className="min-w-0 truncate text-xs font-medium sm:text-sm">{section.label}</span>
-                          {section.badge && <Badge className="h-5 shrink-0 border-none bg-purple-600 px-1.5 text-[10px] text-white">{section.badge}</Badge>}
+                          {section.badge && <Badge className="h-5 shrink-0 border-none bg-blue-700 px-1.5 text-[10px] text-white">{section.badge}</Badge>}
                         </div>
                       </button>
                     )
@@ -535,7 +533,7 @@ export default function ProfilePage() {
 
               <div className="grid gap-4 lg:grid-cols-[240px_minmax(0,1fr)] lg:h-full lg:min-h-0">
                 {/* Desktop Left Stack */}
-                <Card className="hidden lg:block app-surface-card border-none lg:h-full">
+                <Card className="hidden lg:block app-surface-card app-surface-card--ink border-none lg:h-full">
                   <CardContent className="p-3 lg:h-full lg:overflow-y-auto thin-scrollbar overscroll-contain">
                     <div className="space-y-2">
                       {accountSections.map((section) => {
@@ -548,18 +546,18 @@ export default function ProfilePage() {
                             onClick={() => setSelectedSection(section.id)}
                             className={`w-full rounded-xl px-3 py-3 text-left transition-colors ${
                               isActive
-                                ? "bg-purple-100/80 border border-purple-200"
-                                : "bg-white/70 border border-transparent hover:bg-purple-50/70"
+                                ? "bg-blue-100/80 border border-blue-200"
+                                : "bg-white/70 border border-transparent hover:bg-blue-50/70"
                             }`}
                           >
                             <div className="flex items-center justify-between gap-2">
                               <div className="flex items-center gap-2.5">
                                 <div className={`h-8 w-8 rounded-full flex items-center justify-center ${isActive ? "bg-white" : "bg-gray-100"}`}>
-                                  <Icon className={`h-4 w-4 ${isActive ? "text-purple-600" : "text-gray-600"}`} />
+                                  <Icon className={`h-4 w-4 ${isActive ? "text-blue-700" : "text-gray-600"}`} />
                                 </div>
-                                <span className={`text-sm font-medium ${isActive ? "text-purple-800" : "text-gray-700"}`}>{section.label}</span>
+                                <span className={`text-sm font-medium ${isActive ? "text-blue-900" : "text-gray-700"}`}>{section.label}</span>
                               </div>
-                              {section.badge && <Badge className="bg-purple-600 text-white border-none h-5">{section.badge}</Badge>}
+                              {section.badge && <Badge className="bg-blue-700 text-white border-none h-5">{section.badge}</Badge>}
                             </div>
                           </button>
                         )
@@ -569,21 +567,21 @@ export default function ProfilePage() {
                 </Card>
 
                 {/* Right Content Panel */}
-                <Card className="app-surface-card border-none overflow-hidden lg:h-full">
+                <Card className="app-surface-card app-surface-card--green border-none overflow-hidden lg:h-full">
                   <CardContent className="p-0 lg:h-full lg:flex lg:flex-col">
-                    <div className="p-3 sm:p-5 gradient-soft border-b border-purple-100/80">
+                    <div className="p-3 sm:p-5 gradient-soft border-b border-blue-100/80">
                       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                         <div className="min-w-0 space-y-2">
                           <div className="flex min-w-0 flex-wrap items-center gap-2.5">
-                            <div className="h-9 w-9 rounded-full bg-white/90 border border-purple-100 flex items-center justify-center">
-                              <ActiveSectionIcon className="h-4 w-4 text-purple-600" />
+                            <div className="h-9 w-9 rounded-full bg-white/90 border border-blue-100 flex items-center justify-center">
+                              <ActiveSectionIcon className="h-4 w-4 text-blue-700" />
                             </div>
                             <h3 className="truncate font-serif text-lg font-semibold text-gray-900">{activeSection.label}</h3>
-                            {activeSection.badge && <Badge className="shrink-0 border-none bg-purple-600 text-white">{activeSection.badge}</Badge>}
+                            {activeSection.badge && <Badge className="shrink-0 border-none bg-blue-700 text-white">{activeSection.badge}</Badge>}
                           </div>
                           <p className="text-sm text-gray-600">{activeSection.summary}</p>
                         </div>
-                        <Button size="sm" variant="outline" disabled className="w-full sm:w-auto shrink-0 text-purple-700 border-purple-200 bg-white/90">
+                        <Button size="sm" variant="outline" disabled className="w-full sm:w-auto shrink-0 text-blue-800 border-blue-200 bg-white/90">
                           {activeSection.action}
                         </Button>
                       </div>
@@ -601,8 +599,13 @@ export default function ProfilePage() {
                             {upcomingBookings.length === 0 ? (
                               <div className="text-center py-10 text-muted-foreground text-sm">No upcoming bookings</div>
                             ) : (
-                              upcomingBookings.map((booking) => (
-                                <Card key={booking.id} className="app-surface-card card-glow border-none">
+                              upcomingBookings.map((booking, index) => (
+                                <Card
+                                  key={booking.id}
+                                  className={`app-surface-card card-glow border-none ${
+                                    index % 2 === 0 ? "app-surface-card--blue" : "app-surface-card--green"
+                                  }`}
+                                >
                                   <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
                                     <div className="flex gap-3 sm:gap-4">
                                       <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-xl overflow-hidden flex-shrink-0">
@@ -644,7 +647,7 @@ export default function ProfilePage() {
                                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-3 border-t border-border/40">
                                       <div>
                                         <p className="text-xs text-muted-foreground">Total</p>
-                                        <p className="text-lg sm:text-xl font-bold text-[#e91e8c]">{booking.price}</p>
+                                        <p className="text-lg sm:text-xl font-bold text-emerald-700">{booking.price}</p>
                                       </div>
                                       <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                                         <Button variant="outline" size="sm" className="bg-transparent w-full sm:w-auto">
@@ -667,8 +670,13 @@ export default function ProfilePage() {
                             {pastBookings.length === 0 ? (
                               <div className="text-center py-10 text-muted-foreground text-sm">No past bookings</div>
                             ) : (
-                              pastBookings.map((booking) => (
-                                <Card key={booking.id} className="app-surface-card border-none bg-muted/30">
+                              pastBookings.map((booking, index) => (
+                                <Card
+                                  key={booking.id}
+                                  className={`app-surface-card border-none ${
+                                    index % 2 === 0 ? "app-surface-card--ink" : "app-surface-card--blue"
+                                  }`}
+                                >
                                   <CardContent className="p-3 sm:p-4 space-y-3 sm:space-y-4">
                                     <div className="flex gap-3 sm:gap-4">
                                       <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-xl overflow-hidden flex-shrink-0">
@@ -721,8 +729,13 @@ export default function ProfilePage() {
                           </div>
                         ) : (
                           <div className="space-y-4">
-                            {favorites.map((therapist) => (
-                              <Card key={therapist.id} className="app-surface-card card-glow border-none">
+                            {favorites.map((therapist, index) => (
+                              <Card
+                                key={therapist.id}
+                                className={`app-surface-card card-glow border-none ${
+                                  index % 2 === 0 ? "app-surface-card--green" : "app-surface-card--ink"
+                                }`}
+                              >
                                 <CardContent className="p-3 sm:p-4">
                                   <div className="flex gap-3 sm:gap-4 mb-4">
                                     <div className="relative h-16 w-16 sm:h-20 sm:w-20 rounded-xl overflow-hidden flex-shrink-0">
@@ -738,19 +751,19 @@ export default function ProfilePage() {
                                         <div className="min-w-0">
                                           <h3 className="truncate font-semibold text-base sm:text-lg">{therapist.name}</h3>
                                           <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                                            <Star className="h-3 w-3 fill-[#e91e8c] text-[#e91e8c]" />
+                                            <Star className="h-3 w-3 fill-emerald-600 text-emerald-700" />
                                             <span>{therapist.rating} ({therapist.reviews})</span>
                                             <span>-</span>
                                             <MapPin className="h-3 w-3" />
                                             <span>{therapist.distance}</span>
                                           </div>
                                         </div>
-                                        <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 text-[#e91e8c]">
+                                        <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0 text-emerald-700">
                                           <Heart className="h-5 w-5 fill-current" />
                                         </Button>
                                       </div>
                                       <p className="text-sm text-muted-foreground">{therapist.specialties.join(", ")}</p>
-                                      <p className="text-lg font-bold text-[#e91e8c] mt-1">{therapist.price}</p>
+                                      <p className="text-lg font-bold text-emerald-700 mt-1">{therapist.price}</p>
                                     </div>
                                   </div>
 
@@ -775,9 +788,9 @@ export default function ProfilePage() {
                         {activeSection.highlights.map((highlight) => (
                           <div
                             key={highlight}
-                            className="flex items-center gap-2.5 rounded-lg border border-purple-100/70 bg-white/70 px-3 py-2.5"
+                            className="flex items-center gap-2.5 rounded-lg border border-blue-100/70 bg-white/70 px-3 py-2.5"
                           >
-                            <div className="h-2 w-2 rounded-full bg-purple-500" />
+                            <div className="h-2 w-2 rounded-full bg-blue-500" />
                             <p className="text-sm text-gray-700">{highlight}</p>
                           </div>
                         ))}
@@ -816,8 +829,8 @@ export default function ProfilePage() {
                     href={link.href}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
                       isActive 
-                        ? "bg-purple-100/90 text-purple-700 shadow-sm" 
-                        : "text-gray-500 hover:bg-purple-50/80 hover:text-gray-700"
+                        ? "bg-blue-100/90 text-blue-800 shadow-sm" 
+                        : "text-slate-500 hover:bg-emerald-50/80 hover:text-slate-900"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -837,6 +850,7 @@ export default function ProfilePage() {
     </div>
   )
 }
+
 
 
 

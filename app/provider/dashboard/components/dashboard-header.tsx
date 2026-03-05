@@ -6,8 +6,7 @@ import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Bell } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Bell, CalendarClock, Crown, LayoutDashboard } from "lucide-react"
 
 interface DashboardHeaderProps {
   provider: {
@@ -20,75 +19,101 @@ export function DashboardHeader({ provider }: DashboardHeaderProps) {
   const [notificationsOpen, setNotificationsOpen] = useState(false)
 
   const notifications = [
-    { id: 1, message: "New booking request from Sarah M.", time: "5 min ago", read: false },
-    { id: 2, message: "Client review: 5 stars from James K.", time: "1 hour ago", read: false },
-    { id: 3, message: "Your subscription renews in 3 days", time: "2 hours ago", read: true },
+    { id: 1, message: "New booking request from Sarah M.", time: "5m ago", read: false },
+    { id: 2, message: "Client review received from James K.", time: "1h ago", read: false },
+    { id: 3, message: "Your subscription renews in 3 days.", time: "2h ago", read: true },
   ]
+  const unreadCount = notifications.filter((notification) => !notification.read).length
 
   return (
-    <header className="backdrop-blur-xl bg-white/70 border-b border-white/50 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="relative h-10 w-10">
+    <header className="provider-header">
+      <div className="mx-auto w-full max-w-[1680px] px-4 py-3 md:px-6 xl:px-8 2xl:px-10">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 md:gap-5">
+            <Link href="/provider/dashboard" className="flex items-center gap-2">
+              <div className="relative h-9 w-9">
                 <Image src="/logo.png" alt="Lux" fill className="object-contain" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
-                Lux
-              </span>
+              <span className="text-lg font-semibold text-slate-900 md:text-xl">Lux Provider</span>
             </Link>
-            <Badge className="bg-gradient-to-r from-purple-500 to-cyan-500 text-white border-0">Provider</Badge>
+            <Badge className="provider-badge hidden md:inline-flex">Professional account</Badge>
           </div>
+
+          <nav className="hidden items-center gap-1 md:flex">
+            <Link href="/provider/dashboard">
+              <Button variant="ghost" className="text-slate-700 hover:text-slate-900">
+                <LayoutDashboard className="h-4 w-4" />
+                Dashboard
+              </Button>
+            </Link>
+            <Link href="/provider/notifications">
+              <Button variant="ghost" className="text-slate-700 hover:text-slate-900">
+                <CalendarClock className="h-4 w-4" />
+                Notifications
+              </Button>
+            </Link>
+            <Link href="/provider/subscription">
+              <Button variant="ghost" className="text-slate-700 hover:text-slate-900">
+                <Crown className="h-4 w-4" />
+                Plan
+              </Button>
+            </Link>
+          </nav>
+
           <div className="flex items-center gap-3">
             <div className="relative">
               <Button
                 variant="ghost"
                 size="icon"
-                className="relative text-gray-700"
+                className="relative text-slate-700 hover:text-slate-900"
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
+                aria-label="Open notifications"
               >
                 <Bell className="h-5 w-5" />
-                <span className="absolute top-1 right-1 h-2 w-2 bg-pink-500 rounded-full" />
+                {unreadCount > 0 && (
+                  <span className="absolute right-1 top-1 inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-teal-700 px-1 text-[10px] font-semibold text-white">
+                    {unreadCount}
+                  </span>
+                )}
               </Button>
 
               {notificationsOpen && (
-                <Card className="absolute right-0 top-12 w-80 max-h-96 overflow-y-auto glass-card border-0 shadow-xl">
-                  <CardHeader className="pb-3 border-b">
-                    <CardTitle className="text-base">Notifications</CardTitle>
-                  </CardHeader>
-                  <CardContent className="p-0">
+                <div className="provider-card absolute right-0 top-12 z-50 w-[20rem] overflow-hidden">
+                  <div className="border-b border-slate-200 px-4 py-3">
+                    <p className="text-sm font-semibold text-slate-900">Recent activity</p>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto">
                     {notifications.map((notif) => (
                       <Link
                         key={notif.id}
                         href="/provider/notifications"
                         onClick={() => setNotificationsOpen(false)}
-                        className={`flex flex-col gap-1 p-4 border-b hover:bg-gray-50/50 transition-colors cursor-pointer ${
-                          !notif.read ? "bg-pink-50/30" : ""
+                        className={`flex flex-col gap-1 border-b border-slate-100 px-4 py-3 transition-colors last:border-b-0 hover:bg-slate-50 ${
+                          notif.read ? "bg-white" : "bg-slate-50"
                         }`}
                       >
-                        <div className="flex items-start justify-between gap-2">
-                          <p className={`text-sm ${!notif.read ? "font-semibold" : "text-muted-foreground"}`}>
+                        <div className="flex items-start justify-between gap-3">
+                          <p className={`text-sm ${notif.read ? "text-slate-600" : "font-medium text-slate-900"}`}>
                             {notif.message}
                           </p>
-                          {!notif.read && <div className="h-2 w-2 bg-pink-500 rounded-full flex-shrink-0 mt-1" />}
+                          {!notif.read && <span className="mt-1 h-2 w-2 rounded-full bg-teal-600" />}
                         </div>
-                        <p className="text-xs text-muted-foreground">{notif.time}</p>
+                        <p className="text-xs text-slate-500">{notif.time}</p>
                       </Link>
                     ))}
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               )}
             </div>
 
-            <div className="flex items-center gap-3 pl-3 border-l border-gray-200">
-              <Avatar>
+            <div className="flex items-center gap-3 border-l border-slate-300 pl-3">
+              <Avatar className="h-10 w-10 ring-2 ring-white">
                 <AvatarImage src={provider.photo || "/placeholder.svg"} />
-                <AvatarFallback>{provider.name.charAt(0)}</AvatarFallback>
+                <AvatarFallback className="bg-slate-200 text-slate-700">{provider.name.charAt(0)}</AvatarFallback>
               </Avatar>
               <div className="hidden md:block">
-                <p className="text-sm font-semibold text-gray-900">{provider.name}</p>
-                <p className="text-xs text-gray-600">Provider Account</p>
+                <p className="text-sm font-semibold text-slate-900">{provider.name}</p>
+                <p className="text-xs text-slate-600">Provider dashboard</p>
               </div>
             </div>
           </div>

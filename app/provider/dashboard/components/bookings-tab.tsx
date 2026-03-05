@@ -1,10 +1,10 @@
 "use client"
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Calendar, Clock, CheckCircle, XCircle } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CalendarDays, Clock3, MapPin } from "lucide-react"
 
 interface Booking {
   id: number
@@ -15,69 +15,70 @@ interface Booking {
   duration: string
   price: string
   status: "confirmed" | "pending"
+  location?: string
 }
 
 interface BookingsTabProps {
   bookings: Booking[]
 }
 
+const bookingStatusStyles = {
+  confirmed: "border-emerald-200 bg-emerald-50 text-emerald-700",
+  pending: "border-amber-200 bg-amber-50 text-amber-700",
+}
+
 export function BookingsTab({ bookings }: BookingsTabProps) {
   return (
-    <Card className="glass-card border-0">
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <span>Upcoming Bookings</span>
-          <Badge variant="secondary">{bookings.length} pending</Badge>
-        </CardTitle>
+    <Card className="provider-card">
+      <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <CardTitle className="text-lg text-slate-900">Upcoming bookings</CardTitle>
+        <Badge className="provider-badge w-fit">
+          {bookings.length} scheduled
+        </Badge>
       </CardHeader>
       <CardContent className="space-y-4">
         {bookings.map((booking) => (
-          <div
+          <article
             key={booking.id}
-            className="flex items-center justify-between p-4 rounded-xl bg-white/50 hover:bg-white/70 transition-colors"
+            className="provider-card-muted flex flex-col gap-4 p-4 lg:flex-row lg:items-center lg:justify-between"
           >
-            <div className="flex items-center gap-4">
-              <Avatar className="h-12 w-12">
-                <AvatarFallback className="bg-gradient-to-br from-pink-500 to-purple-500 text-white">
-                  {booking.client.charAt(0)}
-                </AvatarFallback>
+            <div className="flex min-w-0 items-start gap-3">
+              <Avatar className="h-11 w-11">
+                <AvatarFallback className="bg-slate-200 text-slate-700">{booking.client.charAt(0)}</AvatarFallback>
               </Avatar>
-              <div>
-                <p className="font-semibold">{booking.client}</p>
-                <p className="text-sm text-muted-foreground">{booking.service}</p>
-                <div className="flex items-center gap-3 mt-1">
-                  <span className="text-xs text-muted-foreground flex items-center gap-1">
-                    <Calendar className="h-3 w-3" />
+              <div className="min-w-0 space-y-1">
+                <p className="font-semibold text-slate-900">{booking.client}</p>
+                <p className="text-sm text-slate-600">{booking.service}</p>
+                <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-500">
+                  <span className="inline-flex items-center gap-1">
+                    <CalendarDays className="h-3.5 w-3.5" />
                     {booking.date}
                   </span>
-                  <span className="text-xs text-muted-foreground flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
-                    {booking.time}
+                  <span className="inline-flex items-center gap-1">
+                    <Clock3 className="h-3.5 w-3.5" />
+                    {booking.time} ({booking.duration})
                   </span>
-                  <span className="text-xs text-muted-foreground">{booking.duration}</span>
+                  {booking.location && (
+                    <span className="inline-flex items-center gap-1">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {booking.location}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <p className="font-bold gradient-text">{booking.price}</p>
-                <Badge
-                  variant={booking.status === "confirmed" ? "default" : "secondary"}
-                  className={booking.status === "confirmed" ? "bg-green-500" : ""}
-                >
-                  {booking.status}
-                </Badge>
-              </div>
-              <div className="flex gap-2">
-                <Button size="sm" className="bg-gradient-to-r from-green-500 to-green-600 text-white">
-                  <CheckCircle className="h-4 w-4" />
-                </Button>
-                <Button size="sm" variant="outline">
-                  <XCircle className="h-4 w-4" />
-                </Button>
-              </div>
+
+            <div className="flex flex-wrap items-center gap-2 lg:justify-end">
+              <Badge className={bookingStatusStyles[booking.status]}>{booking.status}</Badge>
+              <p className="min-w-20 text-right text-sm font-semibold text-slate-900">{booking.price}</p>
+              <Button size="sm" className="provider-primary-btn">
+                Confirm
+              </Button>
+              <Button size="sm" variant="outline" className="border-slate-300 text-slate-700">
+                Reschedule
+              </Button>
             </div>
-          </div>
+          </article>
         ))}
       </CardContent>
     </Card>

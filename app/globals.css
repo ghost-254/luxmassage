@@ -119,9 +119,37 @@
 }
 
 /* Added custom styles for Lux app */
+html.app-theme-lux {
+  --app-blue-700: #1d4ed8;
+  --app-blue-600: #2563eb;
+  --app-blue-500: #3b82f6;
+  --app-green-700: #0f9f78;
+  --app-green-600: #10b981;
+  --app-green-500: #34d399;
+  --app-ink-950: #030712;
+  --app-ink-900: #0f172a;
+  --app-white: #ffffff;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+}
+
+html.app-compact {
+  font-size: 15px;
+}
+
+@media (max-width: 1024px) {
+  html.app-compact {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 640px) {
+  html.app-compact {
+    font-size: 13px;
+  }
 }
 
 body {
@@ -195,6 +223,21 @@ body {
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
 }
 
+.app-surface-card--blue {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(216, 180, 254, 0.35);
+}
+
+.app-surface-card--green {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(216, 180, 254, 0.35);
+}
+
+.app-surface-card--ink {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(216, 180, 254, 0.35);
+}
+
 .mobile-container {
   max-width: 480px;
   margin: 0 auto;
@@ -247,6 +290,139 @@ body {
 .thin-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: oklch(0.708 0 0) transparent;
+}
+
+/* Provider dashboard design language */
+.provider-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(120% 120% at 50% -20%, #ffffff 0%, #f8fafc 45%, #f1f5f9 100%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+}
+
+.provider-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid #e2e8f0;
+  background: rgba(248, 250, 252, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.provider-container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .provider-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.provider-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 8px 30px rgba(15, 23, 42, 0.04);
+}
+
+.provider-card-muted {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.9rem;
+  background: #f8fafc;
+}
+
+.provider-tab-list {
+  display: grid;
+  width: 100%;
+  height: auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border-radius: 0.9rem;
+  border: 1px solid #dbe2ea;
+  background: #f8fafc;
+}
+
+@media (min-width: 768px) {
+  .provider-tab-list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.provider-tab-trigger {
+  min-height: 2.5rem;
+  border-radius: 0.6rem;
+  border: 1px solid transparent;
+  color: #475569;
+  font-weight: 600;
+}
+
+.provider-tab-trigger[data-state="active"] {
+  border-color: #0f766e;
+  background: #0f766e;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.26);
+}
+
+.provider-tab-trigger:not([data-state="active"]):hover {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.provider-primary-btn {
+  border: 1px solid #0f766e;
+  background: #0f766e;
+  color: #ffffff;
+}
+
+.provider-primary-btn:hover {
+  border-color: #0d6962;
+  background: #0d6962;
+  color: #ffffff;
+}
+
+.provider-primary-btn:disabled {
+  border-color: #94a3b8;
+  background: #94a3b8;
+  color: #f8fafc;
+}
+
+.provider-input {
+  border-color: #cbd5e1;
+  background: #ffffff;
+}
+
+.provider-input:focus-visible {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+}
+
+.provider-badge {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.provider-page-title {
+  color: #0f172a;
+  font-size: 1.625rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .provider-page-title {
+    font-size: 1.875rem;
+  }
 }
 
 @layer base {

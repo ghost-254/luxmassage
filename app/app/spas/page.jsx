@@ -15,6 +15,7 @@ import Image from "next/image"
 import { ArrowLeft, Home, Heart, MapPin, MessageCircle, User, LogOut, Search, Star, Clock, Phone, Navigation, Filter, X, SlidersHorizontal, Check, ChevronsUpDown } from "lucide-react"
 import { useState, useMemo } from "react"
 import { cn } from "@/lib/utils"
+import { HistoryBackButton } from "@/components/history-back-button"
 
 export default function SpasPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -265,7 +266,7 @@ export default function SpasPage() {
     const lng = centerSpa.lng
     
     // Create markers for all filtered spas
-    const markers = filteredSpas.slice(0, 5).map(spa => `markers=color:purple%7C${spa.lat},${spa.lng}`).join("&")
+    const markers = filteredSpas.slice(0, 5).map(spa => `markers=color:blue%7C${spa.lat},${spa.lng}`).join("&")
     
     return `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${lat},${lng}&zoom=12`
   }, [filteredSpas])
@@ -437,7 +438,7 @@ export default function SpasPage() {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium text-gray-700">Minimum Rating</label>
-          <span className="text-sm text-purple-600 font-medium">{minRating[0].toFixed(1)}+</span>
+          <span className="text-sm text-blue-700 font-medium">{minRating[0].toFixed(1)}+</span>
         </div>
         <Slider
           value={minRating}
@@ -474,14 +475,14 @@ export default function SpasPage() {
         <div className="flex items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Lux" width={32} height={32} className="h-8 w-8" />
-            <span className="font-serif text-lg font-semibold text-purple-700">Lux</span>
+            <span className="font-serif text-lg font-semibold text-blue-800">Lux</span>
           </Link>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="relative">
                 <Filter className="h-5 w-5 text-gray-600" />
                 {activeFiltersCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-blue-700 text-white text-xs flex items-center justify-center">
                     {activeFiltersCount}
                   </span>
                 )}
@@ -520,7 +521,7 @@ export default function SpasPage() {
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`rounded-full whitespace-nowrap ${
                   selectedCategory === cat.id 
-                    ? "bg-purple-600 hover:bg-purple-700 text-white" 
+                    ? "bg-blue-700 hover:bg-blue-800 text-white" 
                     : "bg-transparent"
                 }`}
               >
@@ -540,14 +541,11 @@ export default function SpasPage() {
             <div className="flex items-center justify-between mb-6">
               <Link href="/" className="flex items-center gap-3">
                 <Image src="/logo.png" alt="Lux" width={40} height={40} className="h-10 w-10" />
-                <span className="font-serif text-xl font-semibold text-purple-700">Lux</span>
+                <span className="font-serif text-xl font-semibold text-blue-800">Lux</span>
               </Link>
-              <Link 
-                href="/" 
-                className="h-9 w-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
-              >
+              <HistoryBackButton className="h-9 w-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
                 <ArrowLeft className="h-4 w-4 text-gray-600" />
-              </Link>
+              </HistoryBackButton>
             </div>
             <div>
               <h1 className="font-serif text-2xl font-bold text-gray-900">Explore Spas</h1>
@@ -582,7 +580,7 @@ export default function SpasPage() {
                     onClick={() => setSelectedCategory(cat.id)}
                     className={`rounded-full ${
                       selectedCategory === cat.id 
-                        ? "bg-purple-600 hover:bg-purple-700 text-white" 
+                        ? "bg-blue-700 hover:bg-blue-800 text-white" 
                         : "bg-transparent"
                     }`}
                   >
@@ -597,7 +595,7 @@ export default function SpasPage() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-sm font-medium text-gray-500">Filters</h3>
                 {activeFiltersCount > 0 && (
-                  <Badge variant="secondary" className="bg-purple-100/90 text-purple-700 shadow-sm">
+                  <Badge variant="secondary" className="bg-blue-100/90 text-blue-800 shadow-sm">
                     {activeFiltersCount} active
                   </Badge>
                 )}
@@ -630,8 +628,8 @@ export default function SpasPage() {
           {/* Panel Footer */}
           <div className="p-4 border-t border-gray-100 bg-gray-50 space-y-3 app-sidebar-footer">
             <div className="flex items-center gap-3 px-2">
-              <div className="h-9 w-9 rounded-full bg-purple-100 flex items-center justify-center">
-                <User className="h-5 w-5 text-purple-600" />
+              <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center">
+                <User className="h-5 w-5 text-blue-700" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
@@ -674,8 +672,17 @@ export default function SpasPage() {
           <div className="flex-1 overflow-x-hidden p-4 lg:overflow-y-auto lg:p-8 pb-[calc(6.25rem+env(safe-area-inset-bottom))] lg:pb-4">
             {filteredSpas.length > 0 ? (
               <div className="grid gap-4 lg:grid-cols-2">
-                {filteredSpas.map((spa) => (
-                  <Card key={spa.id} className="app-surface-card border-none hover:shadow-md transition-shadow cursor-pointer overflow-hidden">
+                {filteredSpas.map((spa, index) => (
+                  <Card
+                    key={spa.id}
+                    className={`app-surface-card border-none hover:shadow-md transition-shadow cursor-pointer overflow-hidden ${
+                      index % 3 === 0
+                        ? "app-surface-card--blue"
+                        : index % 3 === 1
+                          ? "app-surface-card--green"
+                          : "app-surface-card--ink"
+                    }`}
+                  >
                     <div className="relative h-40 w-full">
                       <Image src={spa.image || "/placeholder.svg"} alt={spa.name} fill className="object-cover" />
                       {spa.premium && (
@@ -703,7 +710,7 @@ export default function SpasPage() {
                       </div>
                       <div className="flex flex-wrap gap-1 mb-3">
                         {spa.services.map((service) => (
-                          <Badge key={service} variant="secondary" className="text-xs bg-purple-50 text-purple-700 border-none">
+                          <Badge key={service} variant="secondary" className="text-xs bg-blue-50 text-blue-800 border-none">
                             {service}
                           </Badge>
                         ))}
@@ -713,7 +720,7 @@ export default function SpasPage() {
                           <Phone className="h-3 w-3 mr-1" />
                           Call
                         </Button>
-                        <Button size="sm" className="text-xs bg-purple-600 hover:bg-purple-700 text-white">
+                        <Button size="sm" className="text-xs bg-blue-700 hover:bg-blue-800 text-white">
                           <Navigation className="h-3 w-3 mr-1" />
                           Directions
                         </Button>
@@ -727,7 +734,7 @@ export default function SpasPage() {
                         </div>
                         <Badge 
                           variant="outline" 
-                          className="cursor-pointer hover:bg-purple-50 hover:border-purple-300 text-purple-600 border-purple-200"
+                          className="cursor-pointer hover:bg-blue-50 hover:border-blue-300 text-blue-700 border-blue-200"
                         >
                           Rate
                         </Badge>
@@ -770,8 +777,8 @@ export default function SpasPage() {
                     href={link.href}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
                       isActive 
-                        ? "bg-purple-100/90 text-purple-700 shadow-sm" 
-                        : "text-gray-500 hover:bg-purple-50/80 hover:text-gray-700"
+                        ? "bg-blue-100/90 text-blue-800 shadow-sm" 
+                        : "text-slate-500 hover:bg-emerald-50/80 hover:text-slate-900"
                     }`}
                   >
                     <Icon className="h-4 w-4" />
@@ -791,5 +798,6 @@ export default function SpasPage() {
     </div>
   )
 }
+
 
 

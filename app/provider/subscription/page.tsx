@@ -1,225 +1,211 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Check, CreditCard, Wallet, Zap } from "lucide-react"
+import { ArrowLeft, Bitcoin, Check, CreditCard, ShieldCheck, Smartphone } from "lucide-react"
+import { VerifiedCheck } from "@/components/verified-check"
 
-type SubscriptionTier = "Free" | "Basic" | "Premium"
-type PaymentMethod = "visa" | "crypto" | "mpesa"
+type SubscriptionTier = "Free" | "Standard" | "Premium"
+type PaymentMethod = "card" | "crypto" | "wallet"
 
-const subscriptionPlans = [
+const subscriptionPlans: {
+  name: SubscriptionTier
+  price: string
+  period?: string
+  description: string
+  features: string[]
+  current: boolean
+  recommended?: boolean
+}[] = [
   {
     name: "Free",
     price: "$0",
-    description: "Get started with basic features",
-    features: ["Up to 10 active clients", "Basic profile", "Standard support", "Limited booking slots"],
-    color: "from-gray-500 to-gray-600",
+    description: "Entry access for low booking volume.",
+    features: ["Up to 10 active clients", "Basic listing visibility", "Limited booking slots", "Standard support"],
     current: false,
   },
   {
-    name: "Basic",
-    price: "$2,999",
+    name: "Standard",
+    price: "$6",
     period: "/month",
-    description: "Grow your practice",
+    description: "Balanced growth plan for active providers.",
     features: [
       "Up to 50 active clients",
-      "Enhanced profile",
+      "Improved search ranking",
+      "Client review visibility",
+      "Expanded booking slots",
+      "No verified profile checkmark badge",
       "Email support",
-      "Increased booking slots",
-      "Client reviews",
-      "Custom bio",
     ],
-    color: "from-blue-500 to-blue-600",
     current: true,
-    popular: false,
   },
   {
     name: "Premium",
-    price: "$9,999",
+    price: "$15",
     period: "/month",
-    description: "Maximize your reach",
+    description: "Advanced visibility and full operations toolkit.",
     features: [
       "Unlimited active clients",
-      "Premium profile badge",
-      "24/7 priority support",
+      "Top discovery priority",
+      "Advanced analytics dashboard",
       "Unlimited booking slots",
-      "Client reviews",
-      "Custom bio",
-      "Analytics dashboard",
-      "Marketing tools",
+      "Priority support lane",
+      "Verified profile checkmark badge",
     ],
-    color: "from-pink-500 to-purple-500",
     current: false,
-    popular: true,
+    recommended: true,
   },
 ]
 
-const paymentMethods: { id: PaymentMethod; name: string; icon: string; description: string }[] = [
-  {
-    id: "visa",
-    name: "Visa / Mastercard",
-    icon: "💳",
-    description: "Credit or debit card",
-  },
-  {
-    id: "crypto",
-    name: "Cryptocurrency",
-    icon: "₿",
-    description: "Bitcoin, Ethereum",
-  },
-  {
-    id: "mpesa",
-    name: "Mobile Wallet",
-    icon: "📱",
-    description: "Mobile wallet",
-  },
+const paymentMethods: { id: PaymentMethod; name: string; description: string; icon: typeof CreditCard }[] = [
+  { id: "card", name: "Credit or debit card", description: "Visa, Mastercard, Amex", icon: CreditCard },
+  { id: "crypto", name: "Cryptocurrency", description: "Bitcoin, Ethereum", icon: Bitcoin },
+  { id: "wallet", name: "Mobile wallet", description: "Apple Pay, Google Pay", icon: Smartphone },
 ]
 
 export default function SubscriptionPage() {
   const [selectedTier, setSelectedTier] = useState<SubscriptionTier>("Premium")
-  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod>("visa")
+  const [selectedPayment, setSelectedPayment] = useState<PaymentMethod>("card")
+
+  const currentPlan = subscriptionPlans.find((plan) => plan.current)
+  const selectedPlan = useMemo(() => subscriptionPlans.find((plan) => plan.name === selectedTier), [selectedTier])
+  const selectedPaymentLabel = paymentMethods.find((method) => method.id === selectedPayment)?.name
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-cyan-50">
-      {/* Header */}
-      <header className="backdrop-blur-xl bg-white/70 border-b border-white/50 sticky top-0 z-50 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/provider/dashboard" className="flex items-center gap-2 hover:opacity-80 transition">
-              <ArrowLeft className="h-5 w-5" />
-              <span className="text-sm font-medium">Back to Dashboard</span>
+    <div className="provider-shell">
+      <header className="provider-header">
+        <div className="provider-container py-3">
+          <div className="flex items-center justify-between gap-3">
+            <Link href="/provider/dashboard" className="inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-slate-900">
+              <ArrowLeft className="h-4 w-4" />
+              Back to dashboard
             </Link>
-            <div className="flex items-center gap-2">
-              <div className="relative h-8 w-8">
-                <Image src="/logo.png" alt="Lux" fill className="object-contain" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
-                Lux
-              </span>
-            </div>
+            <Badge className="provider-badge">Current: {currentPlan?.name || "N/A"}</Badge>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-4">Choose Your Plan</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Unlock more clients and grow your therapy practice with our flexible subscription plans
+      <main className="provider-container py-6 md:py-8">
+        <section className="mb-6 space-y-2">
+          <h1 className="provider-page-title">Subscription plans</h1>
+          <p className="max-w-3xl text-sm text-slate-600 md:text-base">
+            Choose the operational tier that matches your current booking volume and growth target.
           </p>
-        </div>
+        </section>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <section className="mb-6 grid gap-4 md:grid-cols-3">
           {subscriptionPlans.map((plan) => (
             <Card
               key={plan.name}
-              className={`glass-card border-0 relative transition-all ${
-                selectedTier === plan.name ? "ring-2 ring-pink-500 scale-105" : ""
-              } ${plan.popular ? "md:scale-105 md:z-10" : ""}`}
+              className={`provider-card relative transition ${
+                selectedTier === plan.name ? "border-teal-500 shadow-lg shadow-teal-900/10" : ""
+              }`}
             >
-              {plan.popular && (
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-pink-500 to-purple-500 text-white">
-                  Most Popular
-                </Badge>
-              )}
-              {plan.current && <Badge className="absolute -top-3 right-4 bg-green-500 text-white">Current Plan</Badge>}
-              <CardHeader>
-                <CardTitle className="text-2xl">{plan.name}</CardTitle>
+              {plan.recommended && <Badge className="absolute right-4 top-4 bg-teal-100 text-teal-700">Recommended</Badge>}
+              {plan.current && <Badge className="absolute left-4 top-4 bg-blue-100 text-blue-700">Current plan</Badge>}
+              <CardHeader className="space-y-2 pt-10">
+                <CardTitle className="flex items-center gap-1.5 text-xl text-slate-900">
+                  {plan.name}
+                  {plan.name === "Premium" && <VerifiedCheck className="h-5 w-5" />}
+                </CardTitle>
                 <CardDescription>{plan.description}</CardDescription>
-                <div className="mt-4">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.period && <span className="text-muted-foreground">{plan.period}</span>}
+                <div className="pt-1">
+                  <span className="text-3xl font-semibold text-slate-900">{plan.price}</span>
+                  {plan.period && <span className="text-sm text-slate-500">{plan.period}</span>}
                 </div>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <Button
-                  className={`w-full text-white ${
-                    plan.current ? "bg-gray-400 cursor-not-allowed" : `bg-gradient-to-r ${plan.color} hover:opacity-90`
-                  }`}
-                  disabled={plan.current}
-                  onClick={() => setSelectedTier(plan.name as SubscriptionTier)}
-                >
-                  {plan.current ? "Current Plan" : `Upgrade to ${plan.name}`}
-                </Button>
-
-                <ul className="space-y-3">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-sm">
-                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
-                      <span>{feature}</span>
+              <CardContent className="space-y-4">
+                <ul className="space-y-2">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-start gap-2 text-sm text-slate-700">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                      {feature}
                     </li>
                   ))}
                 </ul>
+                <Button
+                  className={plan.current ? "w-full border-slate-300 bg-slate-100 text-slate-600" : "provider-primary-btn w-full"}
+                  disabled={plan.current}
+                  onClick={() => setSelectedTier(plan.name)}
+                >
+                  {plan.current ? "Active plan" : `Select ${plan.name}`}
+                </Button>
               </CardContent>
             </Card>
           ))}
-        </div>
+        </section>
 
-        {/* Payment Methods */}
-        <Card className="glass-card border-0 max-w-2xl mx-auto">
-          <CardHeader>
-            <CardTitle>Choose Payment Method</CardTitle>
-            <CardDescription>Select how you'd like to pay for your subscription</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {paymentMethods.map((method) => (
-                <button
-                  key={method.id}
-                  onClick={() => setSelectedPayment(method.id)}
-                  className={`p-4 rounded-lg border-2 transition-all ${
-                    selectedPayment === method.id
-                      ? "border-pink-500 bg-pink-50/50"
-                      : "border-gray-200 hover:border-gray-300"
-                  }`}
-                >
-                  <div className="text-3xl mb-2">{method.icon}</div>
-                  <div className="font-semibold text-sm">{method.name}</div>
-                  <div className="text-xs text-muted-foreground mt-1">{method.description}</div>
-                </button>
-              ))}
-            </div>
+        <section className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+          <Card className="provider-card">
+            <CardHeader>
+              <CardTitle className="text-lg text-slate-900">Payment method</CardTitle>
+              <CardDescription>Choose how you want to pay for your selected plan.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {paymentMethods.map((method) => {
+                const Icon = method.icon
+                const active = selectedPayment === method.id
+                return (
+                  <button
+                    key={method.id}
+                    onClick={() => setSelectedPayment(method.id)}
+                    className={`flex w-full items-center justify-between rounded-lg border p-3 text-left transition ${
+                      active ? "border-teal-500 bg-teal-50" : "border-slate-200 bg-white hover:bg-slate-50"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className={`inline-flex h-9 w-9 items-center justify-center rounded-md ${active ? "bg-teal-100 text-teal-700" : "bg-slate-100 text-slate-700"}`}>
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">{method.name}</p>
+                        <p className="text-xs text-slate-500">{method.description}</p>
+                      </div>
+                    </div>
+                    {active && <Check className="h-4 w-4 text-teal-700" />}
+                  </button>
+                )
+              })}
+            </CardContent>
+          </Card>
 
-            {/* Payment Details */}
-            <div className="bg-white/50 rounded-lg p-6 space-y-4">
-              <div className="flex items-center justify-between pb-4 border-b">
-                <span className="text-muted-foreground">Plan</span>
-                <span className="font-semibold">{selectedTier} Plan</span>
+          <Card className="provider-card">
+            <CardHeader>
+              <CardTitle className="text-lg text-slate-900">Upgrade summary</CardTitle>
+              <CardDescription>Review before checkout.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-500">Selected plan</span>
+                  <span className="font-medium text-slate-900">{selectedPlan?.name}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-500">Billing cycle</span>
+                  <span className="font-medium text-slate-900">Monthly</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-500">Payment method</span>
+                  <span className="font-medium text-slate-900">{selectedPaymentLabel}</span>
+                </div>
+                <div className="flex items-center justify-between border-t border-slate-200 pt-3">
+                  <span className="text-sm font-medium text-slate-700">Amount due today</span>
+                  <span className="text-xl font-semibold text-slate-900">{selectedPlan?.price}</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between pb-4 border-b">
-                <span className="text-muted-foreground">Payment Method</span>
-                <span className="font-semibold flex items-center gap-2">
-                  {selectedPayment === "visa" && <CreditCard className="h-4 w-4" />}
-                  {selectedPayment === "crypto" && <Zap className="h-4 w-4" />}
-                  {selectedPayment === "mpesa" && <Wallet className="h-4 w-4" />}
-                  {paymentMethods.find((m) => m.id === selectedPayment)?.name}
-                </span>
-              </div>
-              <div className="flex items-center justify-between pt-2">
-                <span className="text-lg font-semibold">Amount</span>
-                <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-                  {subscriptionPlans.find((p) => p.name === selectedTier)?.price}
-                </span>
-              </div>
-            </div>
 
-            <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-lg py-6">
-              Complete Upgrade
-            </Button>
-
-            <p className="text-xs text-center text-muted-foreground">
-              Your subscription will be renewed on the same date each month. You can cancel anytime.
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+              <Button className="provider-primary-btn w-full">Complete upgrade</Button>
+              <p className="inline-flex items-center gap-1 text-xs text-slate-500">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Secure billing. Cancel or downgrade anytime.
+              </p>
+            </CardContent>
+          </Card>
+        </section>
+      </main>
     </div>
   )
 }
-

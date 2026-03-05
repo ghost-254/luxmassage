@@ -1,6 +1,7 @@
 import { Geist, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import type { ReactNode } from "react"
+import { RouteHistoryTracker } from "@/components/route-history-tracker"
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -23,7 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${playfair.variable}`}>
-      <body className="font-sans antialiased bg-background text-foreground">{children}</body>
+      <body className="font-sans antialiased bg-background text-foreground">
+        <RouteHistoryTracker />
+        {children}
+      </body>
     </html>
   )
 }

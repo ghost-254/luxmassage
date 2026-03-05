@@ -16,7 +16,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { Star, MapPin, Award, Calendar } from "lucide-react"
-import { GoVerified } from "react-icons/go"
+import { VerifiedCheck } from "@/components/verified-check"
 
 export function SwipeDeck({ therapists, initialTherapistId = "" }) {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -75,15 +75,15 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", duration: 0.5 }}
-          className="h-20 w-20 sm:h-24 sm:w-24 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center shadow-lg"
+          className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-blue-700 to-emerald-600 shadow-lg sm:h-24 sm:w-24"
         >
-          <Heart className="h-10 w-10 sm:h-12 sm:w-12 text-white" />
+          <Heart className="h-8 w-8 text-white sm:h-12 sm:w-12" />
         </motion.div>
         <div className="space-y-2">
-          <h2 className="font-serif text-xl sm:text-2xl font-bold">You've seen everyone!</h2>
-          <p className="text-muted-foreground text-sm">Check back later for new therapists</p>
+          <h2 className="font-serif text-lg sm:text-2xl font-bold">You've seen everyone!</h2>
+          <p className="text-muted-foreground text-xs sm:text-sm">Check back later for new therapists</p>
         </div>
-        <Button onClick={() => setCurrentIndex(0)} className="bg-purple-600 hover:bg-purple-700 text-white">
+        <Button onClick={() => setCurrentIndex(0)} className="bg-blue-700 text-xs text-white hover:bg-blue-800 sm:text-sm">
           Start Over
         </Button>
       </div>
@@ -93,7 +93,7 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
   return (
     <div className="relative w-full h-full flex flex-col">
       {/* Card Stack */}
-      <div className="relative flex-1 w-full mx-auto px-2 sm:px-0 min-h-[430px] sm:min-h-[520px]">
+      <div className="relative flex-1 w-full mx-auto px-2 sm:px-0 min-h-[350px] sm:min-h-[440px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentTherapist.id}
@@ -109,15 +109,15 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex items-center justify-center gap-3 sm:gap-5 py-2 sm:py-3">
+      <div className="flex items-center justify-center gap-2 sm:gap-3.5 py-1 sm:py-2">
         {/* Skip Button */}
         <Button
           size="lg"
           variant="outline"
-          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full border-2 border-red-400 text-red-500 hover:bg-red-50 hover:text-red-600 bg-white shadow-md"
+          className="h-9 w-9 sm:h-11 sm:w-11 rounded-full border-2 border-red-400 bg-white text-red-500 shadow-md hover:bg-red-50 hover:text-red-600"
           onClick={() => handleButtonSwipe("left")}
         >
-          <X className="h-5 w-5 sm:h-6 sm:w-6" />
+          <X className="h-[0.875rem] w-[0.875rem] sm:h-[1.125rem] sm:w-[1.125rem]" />
         </Button>
 
         {/* Info Button */}
@@ -126,10 +126,10 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
             <Button
               size="lg"
               variant="outline"
-              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-2 border-purple-400 text-purple-500 hover:bg-purple-50 bg-white shadow-md"
+              className="h-8 w-8 sm:h-9 sm:w-9 rounded-full border-2 border-blue-400 bg-white text-blue-600 shadow-md hover:bg-blue-50"
               onClick={() => setSelectedTherapist(currentTherapist)}
             >
-              <Info className="h-4 w-4 sm:h-5 sm:w-5" />
+              <Info className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             </Button>
           </DialogTrigger>
           <DialogContent className="w-[calc(100vw-1rem)] max-w-[calc(100vw-1rem)] sm:w-full sm:max-w-lg max-h-[90dvh] overflow-y-auto overflow-x-hidden rounded-2xl p-4 sm:p-6">
@@ -142,46 +142,40 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
                     fill
                     className="object-contain object-center"
                   />
-                  {selectedTherapist.premium && (
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-amber-600 via-yellow-500 to-orange-500 px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-amber-200/80 shadow-[0_10px_24px_rgba(180,83,9,0.35)]">
-                      <GoVerified className="h-3.5 w-3.5 text-yellow-50 drop-shadow-[0_1px_2px_rgba(120,53,15,0.8)]" />
-                      Premium
-                    </div>
-                  )}
                 </div>
 
                 <DialogHeader>
-                  <DialogTitle className="font-serif text-xl sm:text-2xl flex items-center gap-2">
+                  <DialogTitle className="font-serif text-lg sm:text-2xl flex items-center gap-2">
                     {selectedTherapist.name}
-                    {selectedTherapist.verified && (
-                      <GoVerified className="h-5 w-5 text-[#0A66FF] drop-shadow-[0_0_6px_rgba(10,102,255,0.45)]" />
+                    {(selectedTherapist.verified || selectedTherapist.premium) && (
+                      <VerifiedCheck className="h-4 w-4 sm:h-5 sm:w-5" />
                     )}
                   </DialogTitle>
-                  <p className="w-full text-left text-xs font-medium text-purple-700/90">@{selectedTherapist.username}</p>
-                  <DialogDescription className="flex flex-wrap items-center gap-3 text-sm">
+                  <p className="w-full text-left text-[11px] font-medium text-blue-800/90 sm:text-xs">@{selectedTherapist.username}</p>
+                  <DialogDescription className="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
                     <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400 sm:h-4 sm:w-4" />
                       <span className="font-medium text-foreground">{selectedTherapist.rating}</span>
                       <span>({selectedTherapist.reviews})</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <MapPin className="h-4 w-4" />
-                      <span>{selectedTherapist.distance}</span>
+                      <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                      <span>{selectedTherapist.location.city}, {selectedTherapist.location.country}</span>
                     </div>
                   </DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-sm mb-1.5">About</h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{selectedTherapist.bio}</p>
+                    <h3 className="mb-1.5 text-xs font-semibold sm:text-sm">About</h3>
+                    <p className="text-[11px] sm:text-sm text-muted-foreground leading-relaxed">{selectedTherapist.bio}</p>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-sm mb-1.5">Specialties</h3>
+                    <h3 className="mb-1.5 text-xs font-semibold sm:text-sm">Specialties</h3>
                     <div className="flex flex-wrap gap-1.5">
                       {selectedTherapist.specialties.map((specialty, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs bg-purple-50 text-purple-700">
+                        <Badge key={index} variant="secondary" className="bg-blue-50 text-[10px] text-blue-800 sm:text-xs">
                           {specialty}
                         </Badge>
                       ))}
@@ -189,11 +183,11 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-sm mb-1.5">Certifications</h3>
+                    <h3 className="mb-1.5 text-xs font-semibold sm:text-sm">Certifications</h3>
                     <div className="space-y-1.5">
                       {selectedTherapist.certifications.map((cert, index) => (
-                        <div key={index} className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <Award className="h-3.5 w-3.5 text-purple-500" />
+                        <div key={index} className="flex items-center gap-2 text-[11px] text-muted-foreground sm:text-xs">
+                          <Award className="h-3 w-3 text-blue-600 sm:h-3.5 sm:w-3.5" />
                           <span>{cert}</span>
                         </div>
                       ))}
@@ -203,21 +197,21 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
                   <div className="flex items-center justify-between pt-3 border-t">
                     <div>
                       <p className="text-xs text-muted-foreground">Experience</p>
-                      <p className="font-semibold text-sm">{selectedTherapist.yearsExperience} years</p>
+                      <p className="font-semibold text-xs sm:text-sm">{selectedTherapist.yearsExperience} years</p>
                     </div>
                     <div className="text-right">
                       <p className="text-xs text-muted-foreground">Starting from</p>
-                      <p className="text-lg font-bold text-purple-600">{selectedTherapist.price}</p>
+                      <p className="text-base font-bold text-blue-700 sm:text-lg">{selectedTherapist.price}</p>
                     </div>
                   </div>
 
                   <div className="flex gap-2 pt-2">
-                    <Button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-sm">
-                      <Calendar className="h-4 w-4 mr-2" />
+                    <Button className="flex-1 bg-blue-700 text-xs text-white hover:bg-blue-800 sm:text-sm">
+                      <Calendar className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       Book Now
                     </Button>
-                    <Button variant="outline" className="flex-1 text-sm bg-transparent">
-                      <MessageCircle className="h-4 w-4 mr-2" />
+                    <Button variant="outline" className="flex-1 bg-transparent text-xs sm:text-sm">
+                      <MessageCircle className="mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
                       Message
                     </Button>
                   </div>
@@ -228,25 +222,25 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
         </Dialog>
 
         {/* Like Button */}
-        <Button
+      <Button
           size="lg"
-          className="h-12 w-12 sm:h-14 sm:w-14 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg"
+          className="h-9 w-9 sm:h-11 sm:w-11 rounded-full bg-gradient-to-r from-blue-700 to-emerald-600 text-white shadow-lg hover:from-blue-800 hover:to-emerald-700"
           onClick={() => handleButtonSwipe("right")}
         >
-          <Heart className="h-5 w-5 sm:h-6 sm:w-6" />
+          <Heart className="h-[0.875rem] w-[0.875rem] sm:h-[1.125rem] sm:w-[1.125rem]" />
         </Button>
       </div>
 
       {/* Navigation */}
-      <div className="flex items-center justify-center gap-4 pb-1">
+      <div className="flex items-center justify-center gap-3 pb-1">
         <Button
           variant="ghost"
           size="sm"
           onClick={handlePrevious}
           disabled={currentIndex === 0}
-          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground disabled:opacity-40"
+          className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground disabled:opacity-40 sm:text-xs"
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           Prev
         </Button>
         <div className="flex items-center gap-1.5">
@@ -257,8 +251,8 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
                 key={actualIndex}
                 className={`h-1.5 rounded-full transition-all ${
                   actualIndex === currentIndex 
-                    ? "w-6 bg-purple-500" 
-                    : "w-1.5 bg-gray-300"
+                    ? "w-5 bg-blue-500 sm:w-6" 
+                    : "w-1 bg-gray-300 sm:w-1.5"
                 }`}
               />
             )
@@ -269,12 +263,13 @@ export function SwipeDeck({ therapists, initialTherapistId = "" }) {
           size="sm"
           onClick={handleNext}
           disabled={currentIndex >= therapists.length - 1}
-          className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground disabled:opacity-40"
+          className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground disabled:opacity-40 sm:text-xs"
         >
           Next
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
         </Button>
       </div>
     </div>
   )
 }
+

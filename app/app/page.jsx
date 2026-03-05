@@ -8,9 +8,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { Heart, MapPin, Calendar, Star, ArrowLeft, Home, MessageCircle, User, LogOut, Bell, ChevronRight, Gift, CircleCheck } from "lucide-react"
 import therapistsData from "@/data/therapists.json"
-import { GoVerified } from "react-icons/go"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Badge } from "@/components/ui/badge"
+import { VerifiedCheck } from "@/components/verified-check"
+import { HistoryBackButton } from "@/components/history-back-button"
 
 export default function AppHomePage() {
   const user = {
@@ -79,7 +80,7 @@ export default function AppHomePage() {
     }
 
     return (
-      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-purple-100 text-purple-700">
+      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-blue-100 text-blue-800">
         <Heart className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
       </div>
     )
@@ -99,12 +100,12 @@ export default function AppHomePage() {
         <PopoverContent
           align="end"
           sideOffset={10}
-          className="flex max-h-[70vh] w-[calc(100vw-4rem)] max-w-xs flex-col rounded-2xl border border-purple-100 bg-white/95 p-0 shadow-[0_16px_40px_rgba(15,23,42,0.18)] backdrop-blur-xl sm:max-w-sm"
+          className="flex max-h-[70vh] w-[calc(100vw-4rem)] max-w-xs flex-col rounded-2xl border border-blue-100 bg-white/95 p-0 shadow-[0_16px_40px_rgba(15,23,42,0.18)] backdrop-blur-xl sm:max-w-sm"
         >
-          <div className="flex items-center justify-between border-b border-purple-100/80 px-3 sm:px-4 py-2.5 sm:py-3">
+          <div className="flex items-center justify-between border-b border-blue-100/80 px-3 sm:px-4 py-2.5 sm:py-3">
             <h3 className="font-serif text-base sm:text-lg font-semibold text-gray-900">Notifications</h3>
             <div className="flex items-center gap-2">
-              <Badge className="border-none bg-purple-600 text-[10px] sm:text-xs text-white">
+              <Badge className="border-none bg-blue-700 text-[10px] sm:text-xs text-white">
                 {unreadNotifications} new
               </Badge>
               <Button
@@ -113,7 +114,7 @@ export default function AppHomePage() {
                 size="sm"
                 onClick={markAllNotificationsAsRead}
                 disabled={unreadNotifications === 0}
-                className="h-7 px-2 text-[10px] sm:text-xs text-purple-700 hover:bg-purple-50 disabled:opacity-50"
+                className="h-7 px-2 text-[10px] sm:text-xs text-blue-800 hover:bg-blue-50 disabled:opacity-50"
               >
                 Mark all read
               </Button>
@@ -124,7 +125,7 @@ export default function AppHomePage() {
               {notifications.map((item) => (
                 <div
                   key={item.id}
-                  className="rounded-xl border border-transparent bg-white/70 p-2 sm:p-2.5 transition-colors hover:border-purple-100 hover:bg-purple-50/40"
+                  className="rounded-xl border border-transparent bg-white/70 p-2 sm:p-2.5 transition-colors hover:border-blue-100 hover:bg-blue-50/40"
                 >
                   <div className="flex items-start gap-2">
                     <NotificationIcon kind={item.kind} />
@@ -135,11 +136,11 @@ export default function AppHomePage() {
                       </div>
                       <p className="mt-0.5 text-[11px] sm:text-xs leading-relaxed text-gray-600">{item.description}</p>
                       <div className="mt-1.5 flex items-center gap-2">
-                        {item.unread && <span className="h-1.5 w-1.5 rounded-full bg-purple-600" />}
+                        {item.unread && <span className="h-1.5 w-1.5 rounded-full bg-blue-700" />}
                         <button
                           type="button"
                           onClick={() => toggleNotificationReadState(item.id)}
-                          className="text-[10px] sm:text-xs font-medium text-purple-700 hover:text-purple-800"
+                          className="text-[10px] sm:text-xs font-medium text-blue-800 hover:text-blue-900"
                         >
                           {item.unread ? "Mark as read" : "Mark as unread"}
                         </button>
@@ -150,7 +151,7 @@ export default function AppHomePage() {
               ))}
             </div>
           </div>
-          <div className="border-t border-purple-100/80 bg-white/95 p-2.5 sm:p-3">
+          <div className="border-t border-blue-100/80 bg-white/95 p-2.5 sm:p-3">
             <Button asChild variant="outline" className="w-full bg-transparent text-xs sm:text-sm">
               <Link href="/app/profile">Open Account Updates</Link>
             </Button>
@@ -167,7 +168,7 @@ export default function AppHomePage() {
         <div className="flex items-center justify-between px-4 py-3">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Lux" width={32} height={32} className="h-8 w-8" />
-            <span className="font-serif text-lg font-semibold text-purple-700">Lux</span>
+            <span className="font-serif text-lg font-semibold text-blue-800">Lux</span>
           </Link>
           <div className="flex items-center gap-2">
             <NotificationsOverlay />
@@ -184,14 +185,13 @@ export default function AppHomePage() {
             <div className="flex items-center justify-between mb-6">
               <Link href="/" className="flex items-center gap-3">
                 <Image src="/logo.png" alt="Lux" width={40} height={40} className="h-10 w-10" />
-                <span className="font-serif text-xl font-semibold text-purple-700">Lux</span>
+                <span className="font-serif text-xl font-semibold text-blue-800">Lux</span>
               </Link>
-              <Link 
-                href="/" 
+              <HistoryBackButton
                 className="h-9 w-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
               >
                 <ArrowLeft className="h-4 w-4 text-gray-600" />
-              </Link>
+              </HistoryBackButton>
             </div>
             <div>
               <h1 className="font-serif text-2xl font-bold text-gray-900">Welcome Back</h1>
@@ -205,12 +205,12 @@ export default function AppHomePage() {
             <div className="p-6 border-b border-gray-100">
               <h3 className="text-sm font-medium text-gray-500 mb-4">Your Activity</h3>
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-purple-50 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-purple-600">12</p>
+                <div className="bg-blue-50 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-blue-700">12</p>
                   <p className="text-xs text-gray-600">Total Bookings</p>
                 </div>
-                <div className="bg-pink-50 rounded-xl p-4 text-center">
-                  <p className="text-2xl font-bold text-pink-600">5</p>
+                <div className="bg-emerald-50 rounded-xl p-4 text-center">
+                  <p className="text-2xl font-bold text-emerald-700">5</p>
                   <p className="text-xs text-gray-600">Favorites</p>
                 </div>
               </div>
@@ -230,8 +230,8 @@ export default function AppHomePage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-3 rounded-lg bg-gray-50">
-                  <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                    <Heart className="h-4 w-4 text-purple-600" />
+                  <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <Heart className="h-4 w-4 text-blue-700" />
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">New match available</p>
@@ -244,8 +244,8 @@ export default function AppHomePage() {
             {/* Panel Footer */}
             <div className="p-4 border-t border-gray-100 bg-gray-50 space-y-3 app-sidebar-footer">
               <div className="flex items-center gap-3 px-2">
-                <div className="h-9 w-9 rounded-full bg-purple-100 flex items-center justify-center">
-                  <User className="h-5 w-5 text-purple-600" />
+                <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center">
+                  <User className="h-5 w-5 text-blue-700" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
@@ -278,10 +278,10 @@ export default function AppHomePage() {
                 <h2 className="font-semibold text-lg text-gray-900">Quick Actions</h2>
                 <div className="grid grid-cols-2 gap-4">
                   <Link href="/app/swipe" className="block h-full">
-                    <Card className="h-full app-surface-card border-none hover:shadow-md transition-shadow cursor-pointer">
+                    <Card className="h-full app-surface-card app-surface-card--blue border-none hover:shadow-md transition-shadow cursor-pointer">
                       <CardContent className="h-full p-3 sm:p-6 text-center space-y-2 sm:space-y-3 flex flex-col items-center justify-center">
-                        <div className="h-10 w-10 sm:h-12 sm:w-12 mx-auto rounded-full bg-pink-100 flex items-center justify-center">
-                          <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-pink-600" />
+                        <div className="h-10 w-10 sm:h-12 sm:w-12 mx-auto rounded-full bg-emerald-100 flex items-center justify-center">
+                          <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-700" />
                         </div>
                         <div>
                           <h3 className="text-sm sm:text-base font-semibold text-gray-900">Find Therapists</h3>
@@ -292,10 +292,10 @@ export default function AppHomePage() {
                   </Link>
 
                   <Link href="/app/spas" className="block h-full">
-                    <Card className="h-full app-surface-card border-none hover:shadow-md transition-shadow cursor-pointer">
+                    <Card className="h-full app-surface-card app-surface-card--green border-none hover:shadow-md transition-shadow cursor-pointer">
                       <CardContent className="h-full p-3 sm:p-6 text-center space-y-2 sm:space-y-3 flex flex-col items-center justify-center">
-                        <div className="h-10 w-10 sm:h-12 sm:w-12 mx-auto rounded-full bg-purple-100 flex items-center justify-center">
-                          <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600" />
+                        <div className="h-10 w-10 sm:h-12 sm:w-12 mx-auto rounded-full bg-blue-100 flex items-center justify-center">
+                          <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-blue-700" />
                         </div>
                         <div>
                           <h3 className="text-sm sm:text-base font-semibold text-gray-900">Explore Spas</h3>
@@ -311,11 +311,11 @@ export default function AppHomePage() {
               <section className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h2 className="font-semibold text-lg text-gray-900">Upcoming Bookings</h2>
-                  <Link href="/app/profile" className="text-sm text-purple-600 font-medium hover:underline">
+                  <Link href="/app/profile" className="text-sm text-blue-700 font-medium hover:underline">
                     View All
                   </Link>
                 </div>
-                <Card className="app-surface-card border-none">
+                <Card className="app-surface-card app-surface-card--ink border-none">
                   <CardContent className="p-4">
                     <div className="flex min-w-0 gap-3 sm:gap-4">
                       <div className="relative h-14 w-14 sm:h-16 sm:w-16 rounded-xl overflow-hidden flex-shrink-0">
@@ -341,18 +341,26 @@ export default function AppHomePage() {
               <section className="space-y-4">
                 <div className="flex items-center justify-between">
                   <h2 className="font-semibold text-lg text-gray-900">Recommended for You</h2>
-                  <Link href="/app/swipe?tab=premium" className="text-sm text-purple-600 font-medium hover:underline">
+                  <Link href="/app/swipe?tab=premium" className="text-sm text-blue-700 font-medium hover:underline">
                     See All
                   </Link>
                 </div>
                 <div className="space-y-3">
-                  {recommendedTherapists.map((therapist) => (
+                  {recommendedTherapists.map((therapist, index) => (
                     <Link
                       key={therapist.id}
                       href={`/app/swipe?tab=premium&therapist=${encodeURIComponent(therapist.id)}`}
                       className="block"
                     >
-                      <Card className="app-surface-card border-none hover:shadow-md transition-shadow cursor-pointer">
+                      <Card
+                        className={`app-surface-card border-none hover:shadow-md transition-shadow cursor-pointer ${
+                          index % 3 === 0
+                            ? "app-surface-card--blue"
+                            : index % 3 === 1
+                              ? "app-surface-card--green"
+                              : "app-surface-card--ink"
+                        }`}
+                      >
                         <CardContent className="p-4">
                           <div className="flex min-w-0 gap-3 sm:gap-4">
                             <div className="relative h-20 w-20 rounded-xl overflow-hidden flex-shrink-0">
@@ -361,7 +369,7 @@ export default function AppHomePage() {
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-1.5">
                                 <h3 className="font-semibold text-gray-900 truncate">{therapist.name}</h3>
-                                <GoVerified className="h-4 w-4 shrink-0 text-amber-600 drop-shadow-[0_1px_1px_rgba(120,53,15,0.4)]" />
+                                <VerifiedCheck className="h-4 w-4 shrink-0" />
                               </div>
                               <div className="mt-1 flex items-center gap-2 text-xs sm:text-sm text-gray-500">
                                 <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
@@ -370,7 +378,7 @@ export default function AppHomePage() {
                                 <span className="truncate">{therapist.distance}</span>
                               </div>
                               <p className="text-xs text-gray-500 mt-1 truncate">{therapist.specialties.slice(0, 2).join(", ")}</p>
-                              <p className="text-sm font-bold text-purple-600 mt-1">{therapist.price}</p>
+                              <p className="text-sm font-bold text-blue-700 mt-1">{therapist.price}</p>
                             </div>
                             <ChevronRight className="h-5 w-5 text-gray-400 self-center shrink-0" />
                           </div>
@@ -400,8 +408,8 @@ export default function AppHomePage() {
                       href={link.href}
                       className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${
                         isActive 
-                          ? "bg-purple-100/90 text-purple-700 shadow-sm" 
-                          : "text-gray-500 hover:bg-purple-50/80 hover:text-gray-700"
+                          ? "bg-blue-100/90 text-blue-800 shadow-sm" 
+                          : "text-slate-500 hover:bg-emerald-50/80 hover:text-slate-900"
                       }`}
                     >
                       <Icon className="h-4 w-4" />
@@ -421,6 +429,7 @@ export default function AppHomePage() {
       </div>
   )
 }
+
 
 
 
